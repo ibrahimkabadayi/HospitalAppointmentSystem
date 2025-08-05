@@ -1,4 +1,4 @@
-namespace HospitalAppointmentSystem
+namespace HospitalAppointmentSystem.Main
 {
     internal static class Program
     {
