@@ -1,0 +1,10 @@
+﻿What to do:
+-Implement all forms by tommarrow
+-Add animations for appointments
+-Make Admin see all of the users
+-Make admin see all of the appointments (Seperate for doctors and patients)
+-Make doctors can change the status of the appointments and patients can see that
+-Implement fuction for the hashcode password
+-Make sure that the code is clean and readable and optimazable as possible
+-Keep the potantial for further development high
+-And lastly keep your motivation high and dont forget to update this on github

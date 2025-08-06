@@ -25,6 +25,29 @@ namespace HospitalAppointmentSystem
             return entity;
         }
 
+        public async Task<bool> CheckUserAsync(T entity)
+        {
+            try
+            {
+                if (entity == null) return false;
+                var entityType = typeof(T);
+                var idProperty = entityType.GetProperty("ID");
+
+                if (idProperty == null)
+                    return false;
+
+                var idValue = idProperty.GetValue(entity);
+                if (idValue == null) return false;
+
+                var existingEntity = await _dbSet.FindAsync(idValue);
+                return existingEntity != null;
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
@@ -58,7 +81,6 @@ namespace HospitalAppointmentSystem
                 MessageBox.Show(ex.Message);
                 return null;
             }
-            
         }
 
         public async Task<T> UpdateAsync(T entity)
