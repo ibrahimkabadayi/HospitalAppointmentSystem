@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HospitalAppointmentSystem.Model_Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace HospitalAppointmentSystem
@@ -14,6 +15,8 @@ namespace HospitalAppointmentSystem
         public DbSet<Doctors> Doctors { get; set; }
         public DbSet<Patients> Patients { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }
+        public DbSet<Admins> Admins { get; set; }
+        public DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

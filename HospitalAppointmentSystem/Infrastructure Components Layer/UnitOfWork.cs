@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HospitalAppointmentSystem.Model_Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace HospitalAppointmentSystem
@@ -15,11 +16,15 @@ namespace HospitalAppointmentSystem
         private IRepository<Patients> _Patients;
         private IRepository<Branches> _Branches;
         private IRepository<WorkingHours> _WorkingHours;
+        private IRepository<Admins> _Admins;
+        private IRepository<Users> _Users;
         public IRepository<Branches> Branches => _Branches ??= new Repository<Branches>(_context);
         public IRepository<Doctors> Doctors => _Doctors ??= new Repository<Doctors>(_context);
         public IRepository<Patients> Patients => _Patients ??= new Repository<Patients>(_context);
         public IRepository<WorkingHours> WorkingHours => _WorkingHours ??= new Repository<WorkingHours>(_context);
         public IRepository<Appointments> Appointments => _Appointments ??= new Repository<Appointments>(_context);
+        public IRepository<Users> Users => _Users ??= new Repository<Users>(_context);
+        public IRepository<Admins> Admins => _Admins ??= new Repository<Admins>(_context);
 
         public async Task<int> SaveChangesAsync()
         {
