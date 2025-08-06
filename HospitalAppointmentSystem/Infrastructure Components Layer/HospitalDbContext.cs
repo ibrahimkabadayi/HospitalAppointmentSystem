@@ -17,7 +17,7 @@ namespace HospitalAppointmentSystem
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=StockDB;Integrated Security=SSPI;");
+            _ = optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=HospitalDB;Integrated Security=SSPI;");
         }
     }
 }
