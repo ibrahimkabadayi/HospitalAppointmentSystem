@@ -30,16 +30,16 @@
         {
             label1 = new Label();
             label3 = new Label();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            passwordTextBox = new TextBox();
+            emailTextBox = new TextBox();
             label6 = new Label();
             label7 = new Label();
-            button1 = new Button();
-            comboBox1 = new ComboBox();
+            registerButton = new Button();
+            userTypeComboBox = new ComboBox();
             label2 = new Label();
             label4 = new Label();
-            textBox1 = new TextBox();
-            textBox3 = new TextBox();
+            nameTextBox = new TextBox();
+            surnameTextBox = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -62,21 +62,21 @@
             label3.TabIndex = 2;
             label3.Text = "Email";
             // 
-            // textBox4
+            // passwordTextBox
             // 
-            textBox4.Font = new Font("Palatino Linotype", 15.75F);
-            textBox4.Location = new Point(806, 301);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(234, 36);
-            textBox4.TabIndex = 8;
+            passwordTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            passwordTextBox.Location = new Point(806, 303);
+            passwordTextBox.Name = "passwordTextBox";
+            passwordTextBox.Size = new Size(234, 36);
+            passwordTextBox.TabIndex = 8;
             // 
-            // textBox5
+            // emailTextBox
             // 
-            textBox5.Font = new Font("Palatino Linotype", 15.75F);
-            textBox5.Location = new Point(675, 464);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(234, 36);
-            textBox5.TabIndex = 9;
+            emailTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            emailTextBox.Location = new Point(675, 464);
+            emailTextBox.Name = "emailTextBox";
+            emailTextBox.Size = new Size(234, 36);
+            emailTextBox.TabIndex = 9;
             // 
             // label6
             // 
@@ -98,25 +98,28 @@
             label7.TabIndex = 14;
             label7.Text = "Password";
             // 
-            // button1
+            // registerButton
             // 
-            button1.Font = new Font("Palatino Linotype", 12F);
-            button1.Location = new Point(372, 602);
-            button1.Name = "button1";
-            button1.Size = new Size(371, 64);
-            button1.TabIndex = 15;
-            button1.Text = "Register";
-            button1.UseVisualStyleBackColor = true;
+            registerButton.Font = new Font("Palatino Linotype", 12F);
+            registerButton.Location = new Point(372, 602);
+            registerButton.Name = "registerButton";
+            registerButton.Size = new Size(371, 64);
+            registerButton.TabIndex = 15;
+            registerButton.Text = "Register";
+            registerButton.UseVisualStyleBackColor = true;
+            registerButton.Click += registerButton_Click;
+            registerButton.MouseEnter += registerButton_MouseEnter;
+            registerButton.MouseLeave += registerButton_MouseLeave;
             // 
-            // comboBox1
+            // userTypeComboBox
             // 
-            comboBox1.Font = new Font("Microsoft Sans Serif", 15.75F);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Admin", "Doctor", "Patient" });
-            comboBox1.Location = new Point(470, 303);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(198, 33);
-            comboBox1.TabIndex = 16;
+            userTypeComboBox.Font = new Font("Microsoft Sans Serif", 15.75F);
+            userTypeComboBox.FormattingEnabled = true;
+            userTypeComboBox.Items.AddRange(new object[] { "Admin", "Doctor", "Patient" });
+            userTypeComboBox.Location = new Point(470, 303);
+            userTypeComboBox.Name = "userTypeComboBox";
+            userTypeComboBox.Size = new Size(198, 33);
+            userTypeComboBox.TabIndex = 16;
             // 
             // label2
             // 
@@ -138,35 +141,35 @@
             label4.TabIndex = 3;
             label4.Text = "Surname";
             // 
-            // textBox1
+            // nameTextBox
             // 
-            textBox1.Font = new Font("Palatino Linotype", 15.75F);
-            textBox1.Location = new Point(102, 303);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(190, 36);
-            textBox1.TabIndex = 5;
+            nameTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            nameTextBox.Location = new Point(102, 303);
+            nameTextBox.Name = "nameTextBox";
+            nameTextBox.Size = new Size(190, 36);
+            nameTextBox.TabIndex = 5;
             // 
-            // textBox3
+            // surnameTextBox
             // 
-            textBox3.Font = new Font("Palatino Linotype", 15.75F);
-            textBox3.Location = new Point(282, 464);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(190, 36);
-            textBox3.TabIndex = 7;
+            surnameTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            surnameTextBox.Location = new Point(282, 464);
+            surnameTextBox.Name = "surnameTextBox";
+            surnameTextBox.Size = new Size(190, 36);
+            surnameTextBox.TabIndex = 7;
             // 
             // LoginPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1136, 822);
-            Controls.Add(comboBox1);
-            Controls.Add(button1);
+            Controls.Add(userTypeComboBox);
+            Controls.Add(registerButton);
             Controls.Add(label7);
             Controls.Add(label6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox1);
+            Controls.Add(emailTextBox);
+            Controls.Add(passwordTextBox);
+            Controls.Add(surnameTextBox);
+            Controls.Add(nameTextBox);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -182,15 +185,15 @@
 
         private Label label1;
         private Label label3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox passwordTextBox;
+        private TextBox emailTextBox;
         private Label label6;
         private Label label7;
-        private Button button1;
-        private ComboBox comboBox1;
+        private Button registerButton;
+        private ComboBox userTypeComboBox;
         private Label label2;
         private Label label4;
-        private TextBox textBox1;
-        private TextBox textBox3;
+        private TextBox nameTextBox;
+        private TextBox surnameTextBox;
     }
 }

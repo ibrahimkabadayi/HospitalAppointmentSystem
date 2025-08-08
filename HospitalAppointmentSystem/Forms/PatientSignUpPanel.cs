@@ -10,12 +10,10 @@ using System.Windows.Forms;
 
 namespace HospitalAppointmentSystem.Forms
 {
-    public partial class Form5 : Form
+    public partial class PatientSignUpPanel : Form
     {
-        int adminId;
-        public Form5(int id)
+        public PatientSignUpPanel()
         {
-            adminId = id;
             InitializeComponent();
         }
     }

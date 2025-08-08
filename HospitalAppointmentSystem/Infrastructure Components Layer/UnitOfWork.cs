@@ -18,6 +18,11 @@ namespace HospitalAppointmentSystem
         private IRepository<WorkingHours> _WorkingHours;
         private IRepository<Admins> _Admins;
         private IRepository<Users> _Users;
+
+        public UnitOfWork(HospitalDbContext context)
+        {
+            _context = context;
+        }
         public IRepository<Branches> Branches => _Branches ??= new Repository<Branches>(_context);
         public IRepository<Doctors> Doctors => _Doctors ??= new Repository<Doctors>(_context);
         public IRepository<Patients> Patients => _Patients ??= new Repository<Patients>(_context);
@@ -25,6 +30,11 @@ namespace HospitalAppointmentSystem
         public IRepository<Appointments> Appointments => _Appointments ??= new Repository<Appointments>(_context);
         public IRepository<Users> Users => _Users ??= new Repository<Users>(_context);
         public IRepository<Admins> Admins => _Admins ??= new Repository<Admins>(_context);
+
+        public void Dispose()
+        {
+            _context?.Dispose();
+        }
 
         public async Task<int> SaveChangesAsync()
         {

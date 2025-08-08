@@ -12,8 +12,10 @@ namespace HospitalAppointmentSystem.Forms
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        int doctorID;
+        public Form2(int id)
         {
+            doctorID = id;
             InitializeComponent();
         }
     }

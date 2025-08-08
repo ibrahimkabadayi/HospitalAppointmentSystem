@@ -7,7 +7,7 @@ using HospitalAppointmentSystem.Model_Classes;
 
 namespace HospitalAppointmentSystem
 {
-    internal interface IUnitOfWork
+    internal interface IUnitOfWork : IDisposable
     {
         IRepository<Branches> Branches { get; }
         IRepository<Doctors> Doctors { get; }
