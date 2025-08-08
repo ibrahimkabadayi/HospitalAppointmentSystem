@@ -15,6 +15,27 @@ namespace HospitalAppointmentSystem
         }
 
         private Form currentForm;
+        public void ShowMainMenu()
+        {
+            if (currentForm != null)
+            {
+                currentForm.Hide();
+                this.Controls.Remove(currentForm);
+                currentForm.Close();
+                currentForm.Dispose();
+                currentForm = null;
+            }
+
+            this.Text = "LoginPage";
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button || control is Label)
+                {
+                    control.Visible = true;
+                }
+            }
+        }
         private void ShowFormAsPanel(Form formToShow)
         {
             if (currentForm != null)
@@ -103,7 +124,7 @@ namespace HospitalAppointmentSystem
                     registerButton.BackColor.G + (int)((200 - registerButton.BackColor.G) * 0.1),
                     registerButton.BackColor.B
                 );
-                await Task.Delay(15); // küçük bekleme ile animasyon efekti
+                await Task.Delay(15); 
             }
         }
 
