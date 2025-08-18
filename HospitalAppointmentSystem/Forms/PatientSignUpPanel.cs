@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
+﻿
 namespace HospitalAppointmentSystem.Forms
 {
     public partial class PatientSignUpPanel : Form
@@ -33,6 +23,12 @@ namespace HospitalAppointmentSystem.Forms
             string telephone = telephoneTextBox.Text.Trim();
             string birthDate = birthDateTextBox.Text.Trim();
             string ssn = ssnTextBox.Text.Trim();
+
+            if(Methods.LengthOfLongestSubstring(password) < 4) 
+            {
+                MessageBox.Show("Try a different password with different chars.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (name.Length == 0 || surname.Length == 0 || email.Length == 0 ||
                 password.Length == 0 || passwordAgain.Length == 0 || 
@@ -102,60 +98,24 @@ namespace HospitalAppointmentSystem.Forms
             }
         }
 
-        private async void registerButton_MouseEnter(object sender, EventArgs e)
+        private void registerButton_MouseEnter(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 10; i++)
-            {
-                registerButton.BackColor = Color.FromArgb(
-                    255,
-                    registerButton.BackColor.R + (int)((255 - registerButton.BackColor.R) * 0.1),
-                    registerButton.BackColor.G + (int)((200 - registerButton.BackColor.G) * 0.1),
-                    registerButton.BackColor.B
-                );
-                await Task.Delay(15);
-            }
+            Methods.ButtonMouseEnter(registerButton);
         }
 
-        private async void registerButton_MouseLeave(object sender, EventArgs e)
+        private void registerButton_MouseLeave(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 10; i++)
-            {
-                registerButton.BackColor = Color.FromArgb(
-                    255,
-                    registerButton.BackColor.R + (int)((240 - registerButton.BackColor.R) * 0.1),
-                    registerButton.BackColor.G + (int)((240 - registerButton.BackColor.G) * 0.1),
-                    registerButton.BackColor.B + (int)((240 - registerButton.BackColor.B) * 0.1)
-                );
-                await Task.Delay(15);
-            }
+            Methods.ButtonMouseLeave(registerButton);
         }
 
-        private async void returnToLoginButton_MouseEnter(object sender, EventArgs e)
+        private void returnToLoginButton_MouseEnter(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 10; i++)
-            {
-                registerButton.BackColor = Color.FromArgb(
-                    255,
-                    registerButton.BackColor.R + (int)((255 - registerButton.BackColor.R) * 0.1),
-                    registerButton.BackColor.G + (int)((200 - registerButton.BackColor.G) * 0.1),
-                    registerButton.BackColor.B
-                );
-                await Task.Delay(15);
-            }
+            Methods.ButtonMouseEnter(returnToLoginButton);
         }
 
-        private async void returnToLoginButton_MouseLeave(object sender, EventArgs e)
+        private void returnToLoginButton_MouseLeave(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 10; i++)
-            {
-                registerButton.BackColor = Color.FromArgb(
-                    255,
-                    registerButton.BackColor.R + (int)((240 - registerButton.BackColor.R) * 0.1),
-                    registerButton.BackColor.G + (int)((240 - registerButton.BackColor.G) * 0.1),
-                    registerButton.BackColor.B + (int)((240 - registerButton.BackColor.B) * 0.1)
-                );
-                await Task.Delay(15);
-            }
+            Methods.ButtonMouseLeave(returnToLoginButton);
         }
     }
 }

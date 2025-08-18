@@ -114,32 +114,14 @@ namespace HospitalAppointmentSystem
             }
         }
 
-        private async void registerButton_MouseEnter(object sender, EventArgs e)
+        private void registerButton_MouseEnter(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 10; i++)
-            {
-                registerButton.BackColor = Color.FromArgb(
-                    255,
-                    registerButton.BackColor.R + (int)((255 - registerButton.BackColor.R) * 0.1),
-                    registerButton.BackColor.G + (int)((200 - registerButton.BackColor.G) * 0.1),
-                    registerButton.BackColor.B
-                );
-                await Task.Delay(15); 
-            }
+            Methods.ButtonMouseEnter(registerButton);
         }
 
-        private async void registerButton_MouseLeave(object sender, EventArgs e)
+        private void registerButton_MouseLeave(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 10; i++)
-            {
-                registerButton.BackColor = Color.FromArgb(
-                    255,
-                    registerButton.BackColor.R + (int)((240 - registerButton.BackColor.R) * 0.1),
-                    registerButton.BackColor.G + (int)((240 - registerButton.BackColor.G) * 0.1),
-                    registerButton.BackColor.B + (int)((240 - registerButton.BackColor.B) * 0.1)
-                );
-                await Task.Delay(15);
-            }
+            Methods.ButtonMouseLeave(registerButton);
         }
     }
 }
