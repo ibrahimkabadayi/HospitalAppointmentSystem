@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HospitalAppointmentSystem.Forms
 {
-    public partial class UserControl1 : UserControl
+    public partial class UserControl2 : UserControl
     {
-        public UserControl1()
+        public UserControl2()
         {
             InitializeComponent();
         }

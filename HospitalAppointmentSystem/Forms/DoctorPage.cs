@@ -32,6 +32,26 @@ namespace HospitalAppointmentSystem.Forms
         private void button1_Click(object sender, EventArgs e)
         {
 
+            var allAppointments = _unitOfWork.Appointments.FindAsync(x => x.DoctorID == doctorID && x.date.ToString().Equals(dateTextBox.Text));
+            List<Appointments> appointments = allAppointments.Result;
+
+            for(int i = 0; i < appointments.Count; i++) 
+            {
+                Appointments app = appointments[i];
+                var patient = _unitOfWork.Patients.GetByIdAsync(app.PatientID);
+                Patients patientObject = patient.Result;
+
+                AppointmentUC uc = new AppointmentUC();
+
+                uc.nameLabel.Text = patientObject.Name;
+                uc.surnameLabel.Text = patientObject.Surname;
+                uc.dateLabel.Text = app.date.ToString();
+                uc.timeLabel.Text = app.time.ToString();
+                uc.telephoneLabel.Text = patientObject.Telephone;
+                uc.gmailLabel.Text = patientObject.Email;
+
+                panel.Controls.Add(uc);
+            }
         }
     }
 }

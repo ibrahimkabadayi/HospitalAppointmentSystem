@@ -31,8 +31,9 @@
             panel1 = new Panel();
             titleLabel = new Label();
             panel2 = new Panel();
+            panel = new FlowLayoutPanel();
             button1 = new Button();
-            maskedTextBox1 = new MaskedTextBox();
+            dateTextBox = new MaskedTextBox();
             label1 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -59,13 +60,21 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(panel);
             panel2.Controls.Add(button1);
-            panel2.Controls.Add(maskedTextBox1);
+            panel2.Controls.Add(dateTextBox);
             panel2.Controls.Add(label1);
             panel2.Location = new Point(12, 118);
             panel2.Name = "panel2";
             panel2.Size = new Size(1112, 692);
             panel2.TabIndex = 1;
+            // 
+            // panel
+            // 
+            panel.Location = new Point(3, 80);
+            panel.Name = "panel";
+            panel.Size = new Size(1106, 609);
+            panel.TabIndex = 4;
             // 
             // button1
             // 
@@ -78,15 +87,15 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // maskedTextBox1
+            // dateTextBox
             // 
-            maskedTextBox1.Font = new Font("Palatino Linotype", 15.75F);
-            maskedTextBox1.Location = new Point(37, 38);
-            maskedTextBox1.Mask = "00/00/0000";
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(479, 36);
-            maskedTextBox1.TabIndex = 2;
-            maskedTextBox1.ValidatingType = typeof(DateTime);
+            dateTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            dateTextBox.Location = new Point(37, 38);
+            dateTextBox.Mask = "00/00/0000";
+            dateTextBox.Name = "dateTextBox";
+            dateTextBox.Size = new Size(479, 36);
+            dateTextBox.TabIndex = 2;
+            dateTextBox.ValidatingType = typeof(DateTime);
             // 
             // label1
             // 
@@ -122,6 +131,7 @@
         private Label label1;
         private Panel panel2;
         private Button button1;
-        private MaskedTextBox maskedTextBox1;
+        private MaskedTextBox dateTextBox;
+        private FlowLayoutPanel panel;
     }
 }

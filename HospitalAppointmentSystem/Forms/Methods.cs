@@ -36,6 +36,28 @@ namespace HospitalAppointmentSystem.Forms
             }
         }
 
+        public static async void ImageMouseEnter(PictureBox imageBox) 
+        {
+            for(int i = 0; i <= 10; i++) 
+            {
+                imageBox.Location = new Point(
+                    imageBox.Location.X + 1,
+                    imageBox.Location.Y 
+                );
+                await Task.Delay(10);
+            }
+        }
+        public static async void ImageMouseLeave(PictureBox imageBox)
+        {
+            for (int i = 0; i <= 10; i++)
+            {
+                imageBox.Location = new Point(
+                    imageBox.Location.X - 1,
+                    imageBox.Location.Y
+                );
+                await Task.Delay(10);
+            }
+        }
         public static int LengthOfLongestSubstring(string s)
         {
             int[] lastIndex = new int[256];
