@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HospitalAppointmentSystem.Forms.DataTransferObjects;
 
 namespace HospitalAppointmentSystem.Forms
 {
@@ -40,9 +41,11 @@ namespace HospitalAppointmentSystem.Forms
                 Appointments app = appointments[i];
                 var patient = _unitOfWork.Patients.GetByIdAsync(app.PatientID);
                 Patients patientObject = patient.Result;
+                NoteDTO noteDTO = new NoteDTO(app.DoctorNote, app.PatientNote);
+                StatusDTO statusDTO = new StatusDTO(app.status);
 
-                AppointmentUC uc = new AppointmentUC();
-
+                AppointmentUC uc = new AppointmentUC(statusDTO, noteDTO, true);
+                //Need to somehow update to the db whenever a change has been made through UserControls
                 uc.nameLabel.Text = patientObject.Name;
                 uc.surnameLabel.Text = patientObject.Surname;
                 uc.dateLabel.Text = app.date.ToString();

@@ -13,6 +13,8 @@ namespace HospitalAppointmentSystem
         public required int PatientID { get; set; }
         public DateOnly date { get; set; }
         public TimeOnly time { get; set; }
-        public string status { get; set; } 
+        public required string status { get; set; } 
+        public string? DoctorNote { get; set; }
+        public string? PatientNote { get; set; }
     }
 }

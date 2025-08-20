@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panel4 = new Panel();
             timeLabel = new Label();
             dateLabel = new Label();
@@ -45,6 +46,7 @@
             statusPictureBox = new PictureBox();
             docCommentPictureBox = new PictureBox();
             patientCommentPictureBox = new PictureBox();
+            toolTip1 = new ToolTip(components);
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)statusPictureBox).BeginInit();
@@ -204,6 +206,7 @@
             statusPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             statusPictureBox.TabIndex = 8;
             statusPictureBox.TabStop = false;
+            toolTip1.SetToolTip(statusPictureBox, "Change the Status");
             statusPictureBox.Click += pictureBox1_Click;
             statusPictureBox.MouseEnter += statusPictureBox_MouseEnter;
             statusPictureBox.MouseLeave += statusPictureBox_MouseLeave;
@@ -217,6 +220,7 @@
             docCommentPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             docCommentPictureBox.TabIndex = 10;
             docCommentPictureBox.TabStop = false;
+            toolTip1.SetToolTip(docCommentPictureBox, "Write a doctor note");
             docCommentPictureBox.Click += docCommentPictureBox_Click;
             docCommentPictureBox.MouseEnter += docCommentPictureBox_MouseEnter;
             docCommentPictureBox.MouseLeave += docCommentPictureBox_MouseLeave;
@@ -231,6 +235,7 @@
             patientCommentPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             patientCommentPictureBox.TabIndex = 9;
             patientCommentPictureBox.TabStop = false;
+            toolTip1.SetToolTip(patientCommentPictureBox, "Get patient note");
             patientCommentPictureBox.Click += patientCommentPictureBox_Click;
             patientCommentPictureBox.MouseEnter += patientCommentPictureBox_MouseEnter;
             patientCommentPictureBox.MouseLeave += patientCommentPictureBox_MouseLeave;
@@ -245,7 +250,8 @@
             Controls.Add(patientCommentPictureBox);
             Controls.Add(statusPictureBox);
             Name = "AppointmentUC";
-            Size = new Size(290, 209);
+            Size = new Size(284, 207);
+            Load += AppointmentUC_Load;
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
@@ -275,5 +281,6 @@
         public Label telephoneLabel;
         public Label surnameLabel;
         public Label nameLabel;
+        private ToolTip toolTip1;
     }
 }
