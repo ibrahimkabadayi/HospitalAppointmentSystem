@@ -44,8 +44,7 @@ namespace HospitalAppointmentSystem.Forms
                 NoteDTO noteDTO = new NoteDTO(app.DoctorNote, app.PatientNote);
                 StatusDTO statusDTO = new StatusDTO(app.status);
 
-                AppointmentUC uc = new AppointmentUC(statusDTO, noteDTO, true);
-                //Need to somehow update to the db whenever a change has been made through UserControls
+                AppointmentUC uc = new AppointmentUC(statusDTO, noteDTO, true, app.ID);
                 uc.nameLabel.Text = patientObject.Name;
                 uc.surnameLabel.Text = patientObject.Surname;
                 uc.dateLabel.Text = app.date.ToString();

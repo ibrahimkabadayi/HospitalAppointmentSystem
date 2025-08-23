@@ -10,8 +10,9 @@
 
 namespace HospitalAppointmentSystem {
     using System;
-    
-    
+    using System.Drawing;
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -31,7 +32,9 @@ namespace HospitalAppointmentSystem {
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resource1() {
         }
-        
+
+        public static Image Cross_Mark { get; internal set; }
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -66,16 +69,6 @@ namespace HospitalAppointmentSystem {
         internal static System.Drawing.Bitmap Add {
             get {
                 object obj = ResourceManager.GetObject("Add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Cross_Mark {
-            get {
-                object obj = ResourceManager.GetObject("Cross Mark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

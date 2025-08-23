@@ -16,37 +16,39 @@ namespace HospitalAppointmentSystem.Forms
         private StatusDTO statusDTO;
         private NoteDTO noteDTO;
         private bool isDoctor;
-        public AppointmentUC(StatusDTO statusDTO, NoteDTO noteDTO, bool isDoctor)
+        private int AppointmentID;
+        public AppointmentUC(StatusDTO statusDTO, NoteDTO noteDTO, bool isDoctor, int appointmentID)
         {
             InitializeComponent();
             this.statusDTO = statusDTO;
             this.noteDTO = noteDTO;
             this.isDoctor = isDoctor;
+            AppointmentID = appointmentID;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             if (isDoctor && statusDTO.status.Equals("Active")) 
             {
-                statusPictureBox.Image = Resource1.Tick;
+                statusPictureBox.Image = Images.Tick;
                 statusLabel.Text = "Seen";
                 statusDTO.status = "Seen";
             } 
             else if(isDoctor && statusDTO.status.Equals("Seen")) 
             {
-                statusPictureBox.Image = Resource1.Double_Tick;
+                statusPictureBox.Image = Images.Double_Tick;
                 statusLabel.Text = "Active";
                 statusDTO.status = "Active";
             }
             else if (statusDTO.status.Equals("Active"))
             {
-                statusPictureBox.Image = Resource1.Tick;
+                statusPictureBox.Image = Images.Tick;
                 statusLabel.Text = "Canceled";
                 statusDTO.status = "Canceled";
             }
             else 
             {
-                statusPictureBox.Image = Resource1.Cross_Mark;
+                statusPictureBox.Image = Images.Cross_Mark;
                 statusLabel.Text = "Active";
                 statusDTO.status = "Active";
             }
@@ -138,6 +140,35 @@ namespace HospitalAppointmentSystem.Forms
                 statusPictureBox.Image = Resource1.Tick;
             }
             
+        }
+        private void ShowAddNote(NoteDTO noteDTO)
+        {
+            var addNote = new AddNoteUC(noteDTO, true); 
+            addNote.Dock = DockStyle.Fill;
+
+            addNote.OnNoteSave += async (savedNote) =>
+            {
+                using (var uow = new UnitOfWork(new HospitalDbContext()))
+                {
+                    var appointment = await uow.Appointments.GetByIdAsync(AppointmentID);
+                    
+                    if (isDoctor)
+                    {
+                        appointment.DoctorNote = savedNote.DoctorNote;
+                    }
+                    else
+                    {
+                        appointment.PatientNote = savedNote.PatientNote;
+                    }
+
+                    await uow.Appointments.UpdateAsync(appointment);
+                    await uow.SaveChangesAsync();
+                }
+                MessageBox.Show("Not başarıyla kaydedildi!");
+            };
+
+            this.Controls.Add(addNote);
+            addNote.BringToFront();
         }
     }
 }

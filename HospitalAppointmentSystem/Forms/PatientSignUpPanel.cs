@@ -87,13 +87,13 @@ namespace HospitalAppointmentSystem.Forms
             if (isPasswordVisible)
             {
                 passwordTextBox.UseSystemPasswordChar = true;
-                pictureBox1.Image = Resource1.images; 
+                pictureBox1.Image = Images.images; 
                 isPasswordVisible = false;
             }
             else
             {
                 passwordTextBox.UseSystemPasswordChar = false;
-                pictureBox1.Image = Resource1.imgbin_eye_icon_eye_iCUuFjfMyPy2dJfgGRCGUqRcX;
+                pictureBox1.Image = Images.imgbin_eye_icon_eye_iCUuFjfMyPy2dJfgGRCGUqRcX;
                 isPasswordVisible = true;
             }
         }

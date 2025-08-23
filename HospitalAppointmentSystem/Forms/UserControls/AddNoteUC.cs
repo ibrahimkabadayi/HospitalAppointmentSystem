@@ -22,6 +22,7 @@ namespace HospitalAppointmentSystem.Forms
             this.isDoctor = isDoctor;
         }
 
+        public event Action<NoteDTO> OnNoteSave;
         private void AddNoteUC_Load(object sender, EventArgs e)
         {
             if (isDoctor)
@@ -30,17 +31,23 @@ namespace HospitalAppointmentSystem.Forms
                 noteTextBox.Text = noteDTO.PatientNote;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//Delete Button
         {
             noteTextBox.Text = string.Empty;
+            if(isDoctor)
+                noteDTO.DoctorNote = string.Empty;
+            else 
+                noteDTO.PatientNote = string.Empty;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//Save and Close button
         {
             if(isDoctor)
                 noteDTO.DoctorNote = noteTextBox.Text;
             else
                 noteDTO.PatientNote = noteTextBox.Text;
+
+            OnNoteSave?.Invoke(noteDTO);
 
             Hide();
             Dispose();
