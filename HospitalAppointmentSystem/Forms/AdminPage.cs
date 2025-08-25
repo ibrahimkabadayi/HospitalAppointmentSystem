@@ -18,5 +18,25 @@ namespace HospitalAppointmentSystem.Forms
             adminId = id;
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e) //Register Button
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e) //Delete Button
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e) //See all Appointments Button
+        {
+
+        }
+
+        private void Form5_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

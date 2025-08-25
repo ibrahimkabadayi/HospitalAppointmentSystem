@@ -16,5 +16,30 @@ namespace HospitalAppointmentSystem.Forms
         {
             InitializeComponent();
         }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ReturnToAdminPageButton_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ReturnToAdminPageButton_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ReturnToLoginPageButton_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ReturnToLoginPageButton_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
     }
 }
