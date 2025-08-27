@@ -7,39 +7,104 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HospitalAppointmentSystem.Forms.DataTransferObjects;
 
 namespace HospitalAppointmentSystem.Forms
 {
     public partial class Form4 : Form
     {
-        public Form4()
+        int doctorID;
+        int adminID;
+        private Form currentForm;
+
+        public Form4(int doctorID, int adminID)
         {
             InitializeComponent();
+            this.doctorID = doctorID;
+            this.adminID = adminID;
         }
 
-        private void Form4_Load(object sender, EventArgs e)
+        private async void Form4_Load(object sender, EventArgs e)
         {
+            using (var uow = new UnitOfWork(new HospitalDbContext()))
+            {
+                var appointments = await uow.Appointments.FindAsync(x => x.DoctorID == doctorID);
+                List<Appointments> list = appointments;
 
+                foreach (var appointment in list)
+                {
+                    var patient = await uow.Patients.GetByIdAsync(appointment.PatientID);
+                    NoteDTO noteDTO = new NoteDTO(appointment.DoctorNote, appointment.PatientNote);
+                    StatusDTO statusDTO = new StatusDTO(appointment.status);
+                    AppointmentUC uc = new AppointmentUC(statusDTO, noteDTO, false, true, appointment.ID);
+                    uc.nameLabel.Text = patient.Name.ToString();
+                    uc.dateLabel.Text = appointment.date.ToString();
+                    uc.gmailLabel.Text = patient.Email.ToString();
+                    uc.statusLabel.Text = appointment.status.ToString();
+                    uc.telephoneLabel.Text = patient.Telephone.ToString();
+                    uc.timeLabel.Text = appointment.time.ToString();
+                    uc.surnameLabel.Text = patient.Surname.ToString();
+                    flowLayoutPanel1.Controls.Add(uc);
+                }
+            }
         }
 
         private void ReturnToAdminPageButton_MouseEnter(object sender, EventArgs e)
         {
-
+            Methods.ButtonMouseEnter(ReturnToAdminPageButton);
         }
 
         private void ReturnToAdminPageButton_MouseLeave(object sender, EventArgs e)
         {
-
+            Methods.ButtonMouseLeave(ReturnToAdminPageButton);
         }
 
         private void ReturnToLoginPageButton_MouseEnter(object sender, EventArgs e)
         {
-
+            Methods.ButtonMouseEnter(ReturnToLoginPageButton);
         }
 
         private void ReturnToLoginPageButton_MouseLeave(object sender, EventArgs e)
         {
+            Methods.ButtonMouseLeave(ReturnToLoginPageButton);
+        }
 
+        private void ReturnToLoginPageButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is LoginPage)
+                {
+                    LoginPage loginPage = (LoginPage)form;
+                    loginPage.ShowMainMenu();
+                    break;
+                }
+            }
+        }
+
+        private void ReturnToAdminPageButton_Click(object sender, EventArgs e)
+        {
+            ShowFormAsPanel(new Form5(adminID));
+        }
+
+        private void ShowFormAsPanel(Form formToShow)
+        {
+            if (currentForm != null)
+            {
+                currentForm.Hide();
+                this.Controls.Remove(currentForm);
+                currentForm.Close();
+                currentForm.Dispose();
+                currentForm = null;
+            }
+            currentForm = formToShow;
+            currentForm.TopLevel = false;
+            currentForm.FormBorderStyle = FormBorderStyle.None;
+            currentForm.Dock = DockStyle.Fill;
+            this.Controls.Add(currentForm);
+            currentForm.BringToFront();
+            currentForm.Show();
+            this.Text = formToShow.Text;
         }
     }
 }

@@ -16,18 +16,22 @@ namespace HospitalAppointmentSystem.Forms
         private StatusDTO statusDTO;
         private NoteDTO noteDTO;
         private bool isDoctor;
+        private bool isAdmin;
         private int AppointmentID;
-        public AppointmentUC(StatusDTO statusDTO, NoteDTO noteDTO, bool isDoctor, int appointmentID)
+        public AppointmentUC(StatusDTO statusDTO, NoteDTO noteDTO, bool isDoctor, bool isAdmin, int appointmentID)
         {
             InitializeComponent();
             this.statusDTO = statusDTO;
             this.noteDTO = noteDTO;
             this.isDoctor = isDoctor;
+            this.isAdmin = isAdmin;
             AppointmentID = appointmentID;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            if (isAdmin) return;
+
             if (isDoctor && statusDTO.status.Equals("Active")) 
             {
                 statusPictureBox.Image = Images.Tick;
@@ -54,7 +58,7 @@ namespace HospitalAppointmentSystem.Forms
             }
         }
 
-        private void docCommentPictureBox_Click(object sender, EventArgs e)
+        private void docCommentPictureBox_Click(object sender, EventArgs e)//Take this as "ShowChangableNote_Click"
         {
             Form popup = new Form();
             popup.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -62,6 +66,16 @@ namespace HospitalAppointmentSystem.Forms
             popup.Size = new Size(260, 245); 
             popup.MaximizeBox = false;
             popup.MinimizeBox = false;
+
+            if (isAdmin) 
+            {
+                ShowNoteUC showNoteUC = new ShowNoteUC(noteDTO, !isDoctor);
+                showNoteUC.Dock = DockStyle.Fill;
+
+                popup.Controls.Add(showNoteUC);
+                popup.ShowDialog();
+                return;
+            }
 
             AddNoteUC noteUC = new AddNoteUC(noteDTO,isDoctor);
             noteUC.Dock = DockStyle.Fill;
@@ -100,7 +114,7 @@ namespace HospitalAppointmentSystem.Forms
             Methods.ImageMouseLeave(docCommentPictureBox);
         }
 
-        private void patientCommentPictureBox_Click(object sender, EventArgs e)
+        private void patientCommentPictureBox_Click(object sender, EventArgs e)//Take this as "ShowNonChangableNote_Click" 
         {
             Form popup = new Form();
             popup.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -118,6 +132,7 @@ namespace HospitalAppointmentSystem.Forms
 
         private void AppointmentUC_Load(object sender, EventArgs e)
         {
+            if (isAdmin) return;
             if(statusDTO.status.Equals("Active")) 
             {
                 if (isDoctor) 

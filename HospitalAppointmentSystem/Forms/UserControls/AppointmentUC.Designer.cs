@@ -199,7 +199,7 @@
             // 
             // statusPictureBox
             // 
-            statusPictureBox.Image = Resource1.Double_Tick;
+            statusPictureBox.Image = Images.Double_Tick;
             statusPictureBox.Location = new Point(240, 47);
             statusPictureBox.Name = "statusPictureBox";
             statusPictureBox.Size = new Size(27, 19);
@@ -213,7 +213,7 @@
             // 
             // docCommentPictureBox
             // 
-            docCommentPictureBox.Image = Resource1.doc;
+            docCommentPictureBox.Image = Images.doc;
             docCommentPictureBox.Location = new Point(240, 143);
             docCommentPictureBox.Name = "docCommentPictureBox";
             docCommentPictureBox.Size = new Size(27, 19);
@@ -228,7 +228,7 @@
             // patientCommentPictureBox
             // 
             patientCommentPictureBox.BackColor = SystemColors.ControlLight;
-            patientCommentPictureBox.Image = Resource1.Information;
+            patientCommentPictureBox.Image = Images.Information;
             patientCommentPictureBox.Location = new Point(240, 96);
             patientCommentPictureBox.Name = "patientCommentPictureBox";
             patientCommentPictureBox.Size = new Size(27, 19);
