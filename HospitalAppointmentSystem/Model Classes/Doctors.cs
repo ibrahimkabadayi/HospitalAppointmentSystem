@@ -13,6 +13,7 @@ namespace HospitalAppointmentSystem
         public string Surname { get; set; }
         public int BranchID { get; set; }
         public int WorkingHoursID { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 }

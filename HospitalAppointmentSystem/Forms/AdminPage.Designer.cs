@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listBox1 = new ListBox();
+            doctorsList = new ListBox();
             label1 = new Label();
-            textBox1 = new TextBox();
+            nameTextBox = new TextBox();
             registerButton = new Button();
             deleteButton = new Button();
             titleLabel = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            comboBox1 = new ComboBox();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
+            seeAllUsersButton = new Button();
+            timeComboBox = new ComboBox();
+            emailTextBox = new TextBox();
+            branchTextBox = new TextBox();
+            surnameTextBox = new TextBox();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -52,14 +53,14 @@
             panel3.SuspendLayout();
             SuspendLayout();
             // 
-            // listBox1
+            // doctorsList
             // 
-            listBox1.Font = new Font("Palatino Linotype", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(0, 3);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(564, 584);
-            listBox1.TabIndex = 0;
+            doctorsList.Font = new Font("Palatino Linotype", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            doctorsList.FormattingEnabled = true;
+            doctorsList.Location = new Point(0, 3);
+            doctorsList.Name = "doctorsList";
+            doctorsList.Size = new Size(564, 584);
+            doctorsList.TabIndex = 0;
             // 
             // label1
             // 
@@ -71,20 +72,20 @@
             label1.TabIndex = 1;
             label1.Text = "Name";
             // 
-            // textBox1
+            // nameTextBox
             // 
-            textBox1.Font = new Font("Palatino Linotype", 15.75F);
-            textBox1.Location = new Point(21, 170);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(181, 36);
-            textBox1.TabIndex = 6;
+            nameTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            nameTextBox.Location = new Point(21, 170);
+            nameTextBox.Name = "nameTextBox";
+            nameTextBox.Size = new Size(181, 36);
+            nameTextBox.TabIndex = 6;
             // 
             // registerButton
             // 
             registerButton.Font = new Font("Palatino Linotype", 15.75F);
-            registerButton.Location = new Point(21, 593);
+            registerButton.Location = new Point(3, 593);
             registerButton.Name = "registerButton";
-            registerButton.Size = new Size(501, 75);
+            registerButton.Size = new Size(258, 75);
             registerButton.TabIndex = 11;
             registerButton.Text = "Register";
             registerButton.UseVisualStyleBackColor = true;
@@ -122,55 +123,68 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(seeAllUsersButton);
             panel2.Controls.Add(registerButton);
-            panel2.Controls.Add(comboBox1);
-            panel2.Controls.Add(textBox4);
-            panel2.Controls.Add(textBox3);
-            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(timeComboBox);
+            panel2.Controls.Add(emailTextBox);
+            panel2.Controls.Add(branchTextBox);
+            panel2.Controls.Add(surnameTextBox);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(nameTextBox);
             panel2.Controls.Add(label1);
             panel2.Location = new Point(12, 118);
             panel2.Name = "panel2";
             panel2.Size = new Size(539, 671);
             panel2.TabIndex = 15;
             // 
-            // comboBox1
+            // seeAllUsersButton
             // 
-            comboBox1.Font = new Font("Palatino Linotype", 15.75F);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(169, 513);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(202, 36);
-            comboBox1.TabIndex = 10;
+            seeAllUsersButton.Font = new Font("Palatino Linotype", 15.75F);
+            seeAllUsersButton.Location = new Point(267, 593);
+            seeAllUsersButton.Name = "seeAllUsersButton";
+            seeAllUsersButton.Size = new Size(269, 75);
+            seeAllUsersButton.TabIndex = 12;
+            seeAllUsersButton.Text = "See All Users";
+            seeAllUsersButton.UseVisualStyleBackColor = true;
+            seeAllUsersButton.Click += seeAllUsersButton_Click;
             // 
-            // textBox4
+            // timeComboBox
             // 
-            textBox4.Font = new Font("Palatino Linotype", 15.75F);
-            textBox4.Location = new Point(21, 360);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(181, 36);
-            textBox4.TabIndex = 9;
+            timeComboBox.Font = new Font("Palatino Linotype", 15.75F);
+            timeComboBox.FormattingEnabled = true;
+            timeComboBox.Items.AddRange(new object[] { "08:00 - 16:00", "09:00 - 17:00", "10:00 - 18:00", "11:00 - 19:00", "12:00 - 20:00", "13:00 - 21:00", "14:00 - 22:00", "15:00 - 23:00", "16:00 - 00:00", "" });
+            timeComboBox.Location = new Point(169, 513);
+            timeComboBox.Name = "timeComboBox";
+            timeComboBox.Size = new Size(202, 36);
+            timeComboBox.TabIndex = 10;
             // 
-            // textBox3
+            // emailTextBox
             // 
-            textBox3.Font = new Font("Palatino Linotype", 15.75F);
-            textBox3.Location = new Point(341, 360);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(181, 36);
-            textBox3.TabIndex = 8;
+            emailTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            emailTextBox.Location = new Point(21, 360);
+            emailTextBox.Name = "emailTextBox";
+            emailTextBox.Size = new Size(181, 36);
+            emailTextBox.TabIndex = 9;
             // 
-            // textBox2
+            // branchTextBox
             // 
-            textBox2.Font = new Font("Palatino Linotype", 15.75F);
-            textBox2.Location = new Point(341, 170);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(181, 36);
-            textBox2.TabIndex = 7;
+            branchTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            branchTextBox.Location = new Point(341, 360);
+            branchTextBox.Name = "branchTextBox";
+            branchTextBox.Size = new Size(181, 36);
+            branchTextBox.TabIndex = 8;
+            // 
+            // surnameTextBox
+            // 
+            surnameTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            surnameTextBox.Location = new Point(341, 170);
+            surnameTextBox.Name = "surnameTextBox";
+            surnameTextBox.Size = new Size(181, 36);
+            surnameTextBox.TabIndex = 7;
             // 
             // label6
             // 
@@ -226,7 +240,7 @@
             // 
             panel3.Controls.Add(seeAllAppointmentsButton);
             panel3.Controls.Add(deleteButton);
-            panel3.Controls.Add(listBox1);
+            panel3.Controls.Add(doctorsList);
             panel3.Location = new Point(557, 118);
             panel3.Name = "panel3";
             panel3.Size = new Size(567, 671);
@@ -252,6 +266,7 @@
             Controls.Add(panel2);
             Controls.Add(panel3);
             Name = "Form5";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form5";
             Load += Form5_Load;
             panel1.ResumeLayout(false);
@@ -263,9 +278,9 @@
 
         #endregion
 
-        private ListBox listBox1;
+        private ListBox doctorsList;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox nameTextBox;
         private Button registerButton;
         private Button deleteButton;
         private Label titleLabel;
@@ -277,10 +292,11 @@
         private Label label4;
         private Label label3;
         private Label label2;
-        private ComboBox comboBox1;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private ComboBox timeComboBox;
+        private TextBox emailTextBox;
+        private TextBox branchTextBox;
+        private TextBox surnameTextBox;
         private Label label6;
+        private Button seeAllUsersButton;
     }
 }

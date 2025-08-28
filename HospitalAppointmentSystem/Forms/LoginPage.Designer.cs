@@ -56,7 +56,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Palatino Linotype", 15.75F);
-            label3.Location = new Point(675, 433);
+            label3.Location = new Point(806, 272);
             label3.Name = "label3";
             label3.Size = new Size(68, 28);
             label3.TabIndex = 2;
@@ -65,7 +65,7 @@
             // passwordTextBox
             // 
             passwordTextBox.Font = new Font("Palatino Linotype", 15.75F);
-            passwordTextBox.Location = new Point(806, 303);
+            passwordTextBox.Location = new Point(675, 461);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(234, 36);
             passwordTextBox.TabIndex = 8;
@@ -73,7 +73,7 @@
             // emailTextBox
             // 
             emailTextBox.Font = new Font("Palatino Linotype", 15.75F);
-            emailTextBox.Location = new Point(675, 464);
+            emailTextBox.Location = new Point(806, 303);
             emailTextBox.Name = "emailTextBox";
             emailTextBox.Size = new Size(234, 36);
             emailTextBox.TabIndex = 9;
@@ -82,7 +82,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Palatino Linotype", 15.75F);
-            label6.Location = new Point(470, 272);
+            label6.Location = new Point(282, 433);
             label6.Name = "label6";
             label6.Size = new Size(109, 28);
             label6.TabIndex = 10;
@@ -92,7 +92,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Palatino Linotype", 15.75F);
-            label7.Location = new Point(806, 272);
+            label7.Location = new Point(675, 433);
             label7.Name = "label7";
             label7.Size = new Size(103, 28);
             label7.TabIndex = 14;
@@ -116,7 +116,7 @@
             userTypeComboBox.Font = new Font("Microsoft Sans Serif", 15.75F);
             userTypeComboBox.FormattingEnabled = true;
             userTypeComboBox.Items.AddRange(new object[] { "Admin", "Doctor", "Patient" });
-            userTypeComboBox.Location = new Point(470, 303);
+            userTypeComboBox.Location = new Point(282, 464);
             userTypeComboBox.Name = "userTypeComboBox";
             userTypeComboBox.Size = new Size(198, 33);
             userTypeComboBox.TabIndex = 16;
@@ -135,7 +135,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Palatino Linotype", 15.75F);
-            label4.Location = new Point(282, 433);
+            label4.Location = new Point(470, 272);
             label4.Name = "label4";
             label4.Size = new Size(100, 28);
             label4.TabIndex = 3;
@@ -152,7 +152,7 @@
             // surnameTextBox
             // 
             surnameTextBox.Font = new Font("Palatino Linotype", 15.75F);
-            surnameTextBox.Location = new Point(282, 464);
+            surnameTextBox.Location = new Point(470, 303);
             surnameTextBox.Name = "surnameTextBox";
             surnameTextBox.Size = new Size(190, 36);
             surnameTextBox.TabIndex = 7;

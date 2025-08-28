@@ -6,6 +6,7 @@ namespace HospitalAppointmentSystem.Forms
         private readonly IUnitOfWork _unitOfWork;
         public PatientSignUpPanel()
         {
+            passwordAgainTextBox.UseSystemPasswordChar = true;
             InitializeComponent();
             var context = new HospitalDbContext();
             _unitOfWork = new UnitOfWork(context);
@@ -13,8 +14,6 @@ namespace HospitalAppointmentSystem.Forms
 
         private async void registerButton_Click(object sender, EventArgs e)
         {
-            passwordAgainTextBox.UseSystemPasswordChar = true;
-
             string name = nameTextBox.Text.Trim();
             string surname = surnameTextBox.Text.Trim();
             string email = emailTextBox.Text.Trim();

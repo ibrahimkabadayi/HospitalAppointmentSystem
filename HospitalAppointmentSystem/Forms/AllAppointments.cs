@@ -97,6 +97,7 @@ namespace HospitalAppointmentSystem.Forms
                 currentForm.Dispose();
                 currentForm = null;
             }
+
             currentForm = formToShow;
             currentForm.TopLevel = false;
             currentForm.FormBorderStyle = FormBorderStyle.None;
