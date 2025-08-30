@@ -32,14 +32,15 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            brachesListBox = new ListBox();
-            doctorsTextBox = new ListBox();
+            branchesListBox = new ListBox();
+            doctorsListBox = new ListBox();
             timeListBox = new ListBox();
             appointButton = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
-            label5 = new Label();
+            button1 = new Button();
             dateTextBox = new MaskedTextBox();
+            label5 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -85,21 +86,23 @@
             label4.TabIndex = 3;
             label4.Text = "Doctors";
             // 
-            // brachesListBox
+            // branchesListBox
             // 
-            brachesListBox.FormattingEnabled = true;
-            brachesListBox.Location = new Point(11, 40);
-            brachesListBox.Name = "brachesListBox";
-            brachesListBox.Size = new Size(362, 544);
-            brachesListBox.TabIndex = 4;
+            branchesListBox.FormattingEnabled = true;
+            branchesListBox.Location = new Point(11, 40);
+            branchesListBox.Name = "branchesListBox";
+            branchesListBox.Size = new Size(362, 544);
+            branchesListBox.TabIndex = 4;
+            branchesListBox.SelectedIndexChanged += brachesListBox_SelectedIndexChanged;
             // 
-            // doctorsTextBox
+            // doctorsListBox
             // 
-            doctorsTextBox.FormattingEnabled = true;
-            doctorsTextBox.Location = new Point(379, 40);
-            doctorsTextBox.Name = "doctorsTextBox";
-            doctorsTextBox.Size = new Size(362, 544);
-            doctorsTextBox.TabIndex = 5;
+            doctorsListBox.FormattingEnabled = true;
+            doctorsListBox.Location = new Point(379, 40);
+            doctorsListBox.Name = "doctorsListBox";
+            doctorsListBox.Size = new Size(362, 544);
+            doctorsListBox.TabIndex = 5;
+            doctorsListBox.SelectedIndexChanged += doctorsTextBox_SelectedIndexChanged;
             // 
             // timeListBox
             // 
@@ -112,12 +115,15 @@
             // appointButton
             // 
             appointButton.Font = new Font("Palatino Linotype", 15.75F);
-            appointButton.Location = new Point(545, 601);
+            appointButton.Location = new Point(747, 601);
             appointButton.Name = "appointButton";
-            appointButton.Size = new Size(564, 69);
+            appointButton.Size = new Size(362, 69);
             appointButton.TabIndex = 7;
             appointButton.Text = "Appoint";
             appointButton.UseVisualStyleBackColor = true;
+            appointButton.Click += appointButton_Click;
+            appointButton.MouseEnter += appointButton_MouseEnter;
+            appointButton.MouseLeave += appointButton_MouseLeave;
             // 
             // panel1
             // 
@@ -129,19 +135,43 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(appointButton);
             panel2.Controls.Add(dateTextBox);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(timeListBox);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(doctorsTextBox);
+            panel2.Controls.Add(doctorsListBox);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(brachesListBox);
+            panel2.Controls.Add(branchesListBox);
             panel2.Location = new Point(6, 105);
             panel2.Name = "panel2";
             panel2.Size = new Size(1126, 723);
             panel2.TabIndex = 9;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Palatino Linotype", 15.75F);
+            button1.Location = new Point(379, 601);
+            button1.Name = "button1";
+            button1.Size = new Size(362, 69);
+            button1.TabIndex = 8;
+            button1.Text = "See All Appointments";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            button1.MouseEnter += button1_MouseEnter;
+            button1.MouseLeave += button1_MouseLeave;
+            // 
+            // dateTextBox
+            // 
+            dateTextBox.Font = new Font("Palatino Linotype", 15.75F);
+            dateTextBox.Location = new Point(11, 634);
+            dateTextBox.Mask = "00/00/0000";
+            dateTextBox.Name = "dateTextBox";
+            dateTextBox.Size = new Size(362, 36);
+            dateTextBox.TabIndex = 3;
+            dateTextBox.ValidatingType = typeof(DateTime);
             // 
             // label5
             // 
@@ -153,16 +183,6 @@
             label5.TabIndex = 2;
             label5.Text = "Date";
             // 
-            // dateTextBox
-            // 
-            dateTextBox.Font = new Font("Palatino Linotype", 15.75F);
-            dateTextBox.Location = new Point(11, 634);
-            dateTextBox.Mask = "00/00/0000";
-            dateTextBox.Name = "dateTextBox";
-            dateTextBox.Size = new Size(528, 36);
-            dateTextBox.TabIndex = 3;
-            dateTextBox.ValidatingType = typeof(DateTime);
-            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -173,6 +193,7 @@
             Name = "Form3";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form3";
+            Load += Form3_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -185,13 +206,14 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private ListBox brachesListBox;
-        private ListBox doctorsTextBox;
+        private ListBox branchesListBox;
+        private ListBox doctorsListBox;
         private ListBox timeListBox;
         private Button appointButton;
         private Panel panel1;
         private Panel panel2;
         private MaskedTextBox dateTextBox;
         private Label label5;
+        private Button button1;
     }
 }

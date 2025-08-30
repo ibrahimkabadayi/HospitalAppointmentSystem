@@ -8,7 +8,7 @@ namespace HospitalAppointmentSystem
 {
     internal class Appointments
     {
-        public required int ID { get; set; }
+        public int ID { get; set; }
         public required int DoctorID { get; set; }
         public required int PatientID { get; set; }
         public DateOnly date { get; set; }
