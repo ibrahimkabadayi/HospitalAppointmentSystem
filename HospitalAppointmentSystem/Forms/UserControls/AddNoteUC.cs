@@ -20,6 +20,8 @@ namespace HospitalAppointmentSystem.Forms
             InitializeComponent();
             this.noteDTO = noteDTO;
             this.isDoctor = isDoctor;
+            ButtonAnimationHelper.SetupButtonAnimation(deleteButton);
+            ButtonAnimationHelper.SetupButtonAnimation(button2);
         }
 
         public event Action<NoteDTO> OnNoteSave;

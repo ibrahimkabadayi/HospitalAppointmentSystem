@@ -20,6 +20,7 @@ namespace HospitalAppointmentSystem.Forms
             InitializeComponent();
             this.notes = notes;
             this.isDoctor = isDoctor;
+            ButtonAnimationHelper.SetupButtonAnimation(button1);
         }
 
         private void button1_Click(object sender, EventArgs e)
