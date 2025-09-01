@@ -84,5 +84,24 @@ namespace HospitalAppointmentSystem.Forms
 
             return maxLen;
         }
+        public static void ShowFormAsPanel(Form formToShow, Form parentForm, ref Form currentForm)
+        {
+            if (currentForm != null)
+            {
+                currentForm.Hide();
+                parentForm.Controls.Remove(currentForm);  // this yerine parentForm
+                currentForm.Close();
+                currentForm.Dispose();
+                currentForm = null;
+            }
+            currentForm = formToShow;
+            currentForm.TopLevel = false;
+            currentForm.FormBorderStyle = FormBorderStyle.None;
+            currentForm.Dock = DockStyle.Fill;
+            parentForm.Controls.Add(currentForm);  // this yerine parentForm
+            currentForm.BringToFront();
+            currentForm.Show();
+            parentForm.Text = formToShow.Text;  // this yerine parentForm
+        }
     }
 }

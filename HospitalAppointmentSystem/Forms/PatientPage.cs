@@ -111,7 +111,7 @@ namespace HospitalAppointmentSystem.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ShowFormAsPanel(new PatientAppointments(patientID));
+            Methods.ShowFormAsPanel(new PatientAppointments(patientID), this, ref currentForm);
         }
 
         private async void appointButton_Click(object sender, EventArgs e)
@@ -170,26 +170,6 @@ namespace HospitalAppointmentSystem.Forms
         private void appointButton_MouseLeave(object sender, EventArgs e)
         {
             Methods.ButtonMouseLeave(appointButton);
-        }
-        private void ShowFormAsPanel(Form formToShow)
-        {
-            if (currentForm != null)
-            {
-                currentForm.Hide();
-                this.Controls.Remove(currentForm);
-                currentForm.Close();
-                currentForm.Dispose();
-                currentForm = null;
-            }
-
-            currentForm = formToShow;
-            currentForm.TopLevel = false;
-            currentForm.FormBorderStyle = FormBorderStyle.None;
-            currentForm.Dock = DockStyle.Fill;
-            this.Controls.Add(currentForm);
-            currentForm.BringToFront();
-            currentForm.Show();
-            this.Text = formToShow.Text;
         }
     }
 }

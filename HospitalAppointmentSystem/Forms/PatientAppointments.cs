@@ -47,7 +47,7 @@ namespace HospitalAppointmentSystem.Forms
 
         private void ReturnToPatientPageButton_Click(object sender, EventArgs e)
         {
-            ShowFormAsPanel(new Form3(PatientID));
+            Methods.ShowFormAsPanel(new Form3(PatientID), this, ref currentForm);
         }
 
         private void ReturnToLoginPageButton_Click(object sender, EventArgs e)
@@ -81,26 +81,6 @@ namespace HospitalAppointmentSystem.Forms
         private void ReturnToLoginPageButton_MouseLeave(object sender, EventArgs e)
         {
             Methods.ButtonMouseLeave(ReturnToLoginPageButton);
-        }
-        private void ShowFormAsPanel(Form formToShow)
-        {
-            if (currentForm != null)
-            {
-                currentForm.Hide();
-                this.Controls.Remove(currentForm);
-                currentForm.Close();
-                currentForm.Dispose();
-                currentForm = null;
-            }
-
-            currentForm = formToShow;
-            currentForm.TopLevel = false;
-            currentForm.FormBorderStyle = FormBorderStyle.None;
-            currentForm.Dock = DockStyle.Fill;
-            this.Controls.Add(currentForm);
-            currentForm.BringToFront();
-            currentForm.Show();
-            this.Text = formToShow.Text;
         }
     }
 }

@@ -36,28 +36,6 @@ namespace HospitalAppointmentSystem
                 }
             }
         }
-        private void ShowFormAsPanel(Form formToShow)
-        {
-            if (currentForm != null)
-            {
-                currentForm.Hide();
-                this.Controls.Remove(currentForm);
-                currentForm.Close();
-                currentForm.Dispose();
-                currentForm = null;
-            }
-
-            currentForm = formToShow;
-            currentForm.TopLevel = false;
-            currentForm.FormBorderStyle = FormBorderStyle.None;
-            currentForm.Dock = DockStyle.Fill;
-
-            this.Controls.Add(currentForm);
-            currentForm.BringToFront();
-            currentForm.Show();
-
-            this.Text = formToShow.Text;
-        }
         private async void registerButton_Click(object sender, EventArgs e)
         {
             string name = nameTextBox.Text.Trim();
@@ -84,7 +62,7 @@ namespace HospitalAppointmentSystem
 
                 if (result == DialogResult.Yes)
                 {
-                    ShowFormAsPanel(new PatientSignUpPanel());
+                    Methods.ShowFormAsPanel(new PatientSignUpPanel(), this, ref currentForm);
                     return;
                 }
                 return;
@@ -100,15 +78,15 @@ namespace HospitalAppointmentSystem
 
                 if (userType.Equals("Doctor"))
                 {
-                    ShowFormAsPanel(new Form2(UserInServer.UserTypeID));
+                    Methods.ShowFormAsPanel(new Form2(UserInServer.UserTypeID), this, ref currentForm);
                 }
                 else if (userType.Equals("Admin"))
                 {
-                    ShowFormAsPanel(new Form5(UserInServer.UserTypeID));
+                    Methods.ShowFormAsPanel(new Form5(UserInServer.UserTypeID), this, ref currentForm);
                 }
                 else
                 {
-                    ShowFormAsPanel(new Form3(UserInServer.UserTypeID));
+                    Methods.ShowFormAsPanel(new Form3(UserInServer.UserTypeID), this, ref currentForm);
                 }
 
             }

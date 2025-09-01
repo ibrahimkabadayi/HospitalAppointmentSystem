@@ -110,7 +110,7 @@ namespace HospitalAppointmentSystem.Forms
 
             int doctorID = Convert.ToInt32(array[0]);
 
-            ShowFormAsPanel(new Form4(doctorID, adminId));
+            Methods.ShowFormAsPanel(new Form4(doctorID, adminId), this, ref currentForm);
         }
 
         private void Form5_Load(object sender, EventArgs e)
@@ -140,31 +140,9 @@ namespace HospitalAppointmentSystem.Forms
 
             listBox.DataSource = txtList;
         }
-
-        private void ShowFormAsPanel(Form formToShow)
-        {
-            if (currentForm != null)
-            {
-                currentForm.Hide();
-                this.Controls.Remove(currentForm);
-                currentForm.Close();
-                currentForm.Dispose();
-                currentForm = null;
-            }
-
-            currentForm = formToShow;
-            currentForm.TopLevel = false;
-            currentForm.FormBorderStyle = FormBorderStyle.None;
-            currentForm.Dock = DockStyle.Fill;
-            this.Controls.Add(currentForm);
-            currentForm.BringToFront();
-            currentForm.Show();
-            this.Text = formToShow.Text;
-        }
-
         private void seeAllUsersButton_Click(object sender, EventArgs e)
         {
-
+            Methods.ShowFormAsPanel(new AllUsers(adminId), this, ref currentForm);
         }
     }
 }

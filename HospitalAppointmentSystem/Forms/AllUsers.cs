@@ -21,28 +21,6 @@ namespace HospitalAppointmentSystem.Forms
         }
 
         private Form currentForm;
-
-        private void ShowFormAsPanel(Form formToShow)
-        {
-            if (currentForm != null)
-            {
-                currentForm.Hide();
-                this.Controls.Remove(currentForm);
-                currentForm.Close();
-                currentForm.Dispose();
-                currentForm = null;
-            }
-
-            currentForm = formToShow;
-            currentForm.TopLevel = false;
-            currentForm.FormBorderStyle = FormBorderStyle.None;
-            currentForm.Dock = DockStyle.Fill;
-            this.Controls.Add(currentForm);
-            currentForm.BringToFront();
-            currentForm.Show();
-            this.Text = formToShow.Text;
-        }
-
         private void ReturnToLoginPageButton_Click_1(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
@@ -58,7 +36,7 @@ namespace HospitalAppointmentSystem.Forms
 
         private void ReturnToAdminPageButton_Click_1(object sender, EventArgs e)
         {
-            ShowFormAsPanel(new Form5(adminID));
+            Methods.ShowFormAsPanel(new Form5(adminID), this, ref currentForm);
         }
 
         private async void AllUsers_Load(object sender, EventArgs e)
