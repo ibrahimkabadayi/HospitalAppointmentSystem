@@ -22,6 +22,8 @@ namespace HospitalAppointmentSystem.Forms
             InitializeComponent();
             this.doctorID = doctorID;
             this.adminID = adminID;
+            ButtonAnimationHelper.SetupButtonAnimation(ReturnToAdminPageButton);
+            ButtonAnimationHelper.SetupButtonAnimation(ReturnToLoginPageButton);
         }
 
         private async void Form4_Load(object sender, EventArgs e)
@@ -48,27 +50,6 @@ namespace HospitalAppointmentSystem.Forms
                 }
             }
         }
-
-        private void ReturnToAdminPageButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(ReturnToAdminPageButton);
-        }
-
-        private void ReturnToAdminPageButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(ReturnToAdminPageButton);
-        }
-
-        private void ReturnToLoginPageButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(ReturnToLoginPageButton);
-        }
-
-        private void ReturnToLoginPageButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(ReturnToLoginPageButton);
-        }
-
         private void ReturnToLoginPageButton_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)

@@ -24,6 +24,10 @@ namespace HospitalAppointmentSystem.Forms
             InitializeComponent();
             var context = new HospitalDbContext();
             _unitOfWork = new UnitOfWork(context);
+            ButtonAnimationHelper.SetupButtonAnimation(deleteButton);
+            ButtonAnimationHelper.SetupButtonAnimation(registerButton);
+            ButtonAnimationHelper.SetupButtonAnimation(seeAllAppointmentsButton);
+            ButtonAnimationHelper.SetupButtonAnimation(seeAllUsersButton);
         }
 
         private async void button1_Click(object sender, EventArgs e) //Register Button

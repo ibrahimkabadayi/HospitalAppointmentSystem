@@ -21,6 +21,7 @@ namespace HospitalAppointmentSystem.Forms
             InitializeComponent();
             var context = new HospitalDbContext();
             _unitOfWork = new UnitOfWork(context);
+            ButtonAnimationHelper.SetupButtonAnimation(button1);
         }
 
         private void Form2_Load(object sender, EventArgs e)

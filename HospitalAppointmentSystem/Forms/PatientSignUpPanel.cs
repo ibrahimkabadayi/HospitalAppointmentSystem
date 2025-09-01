@@ -6,10 +6,11 @@ namespace HospitalAppointmentSystem.Forms
         private readonly IUnitOfWork _unitOfWork;
         public PatientSignUpPanel()
         {
-            passwordAgainTextBox.UseSystemPasswordChar = true;
             InitializeComponent();
             var context = new HospitalDbContext();
             _unitOfWork = new UnitOfWork(context);
+            ButtonAnimationHelper.SetupButtonAnimation(registerButton);
+            ButtonAnimationHelper.SetupButtonAnimation(returnToLoginButton);
         }
 
         private async void registerButton_Click(object sender, EventArgs e)
@@ -95,26 +96,6 @@ namespace HospitalAppointmentSystem.Forms
                 pictureBox1.Image = Images.imgbin_eye_icon_eye_iCUuFjfMyPy2dJfgGRCGUqRcX;
                 isPasswordVisible = true;
             }
-        }
-
-        private void registerButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(registerButton);
-        }
-
-        private void registerButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(registerButton);
-        }
-
-        private void returnToLoginButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(returnToLoginButton);
-        }
-
-        private void returnToLoginButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(returnToLoginButton);
         }
     }
 }

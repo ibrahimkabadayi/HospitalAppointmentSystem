@@ -43,8 +43,6 @@
             ReturnToLoginPageButton.Text = "Return to Login Page";
             ReturnToLoginPageButton.UseVisualStyleBackColor = true;
             ReturnToLoginPageButton.Click += ReturnToLoginPageButton_Click_1;
-            ReturnToLoginPageButton.MouseEnter += ReturnToLoginPageButton_MouseEnter;
-            ReturnToLoginPageButton.MouseLeave += ReturnToLoginPageButton_MouseLeave;
             // 
             // ReturnToAdminPageButton
             // 
@@ -56,8 +54,6 @@
             ReturnToAdminPageButton.Text = "Return to Admin Page";
             ReturnToAdminPageButton.UseVisualStyleBackColor = true;
             ReturnToAdminPageButton.Click += ReturnToAdminPageButton_Click_1;
-            ReturnToAdminPageButton.MouseEnter += ReturnToAdminPageButton_MouseEnter;
-            ReturnToAdminPageButton.MouseLeave += ReturnToAdminPageButton_MouseLeave;
             // 
             // listBox1
             // 

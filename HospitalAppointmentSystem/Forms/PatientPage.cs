@@ -23,6 +23,8 @@ namespace HospitalAppointmentSystem.Forms
             InitializeComponent();
             var context = new HospitalDbContext();
             _unitOfWork = new UnitOfWork(context);
+            ButtonAnimationHelper.SetupButtonAnimation(button1);
+            ButtonAnimationHelper.SetupButtonAnimation(appointButton);
         }
 
         private async void Form3_Load(object sender, EventArgs e)
@@ -150,26 +152,6 @@ namespace HospitalAppointmentSystem.Forms
 
             await _unitOfWork.Appointments.AddAsync(appointment);
             await _unitOfWork.SaveChangesAsync();
-        }
-
-        private void button1_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(button1);
-        }
-
-        private void button1_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(button1);
-        }
-
-        private void appointButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(appointButton);
-        }
-
-        private void appointButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(appointButton);
         }
     }
 }

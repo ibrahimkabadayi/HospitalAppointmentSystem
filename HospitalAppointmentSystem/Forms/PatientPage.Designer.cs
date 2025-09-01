@@ -122,8 +122,6 @@
             appointButton.Text = "Appoint";
             appointButton.UseVisualStyleBackColor = true;
             appointButton.Click += appointButton_Click;
-            appointButton.MouseEnter += appointButton_MouseEnter;
-            appointButton.MouseLeave += appointButton_MouseLeave;
             // 
             // panel1
             // 
@@ -160,8 +158,6 @@
             button1.Text = "See All Appointments";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            button1.MouseEnter += button1_MouseEnter;
-            button1.MouseLeave += button1_MouseLeave;
             // 
             // dateTextBox
             // 

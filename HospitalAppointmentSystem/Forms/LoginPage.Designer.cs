@@ -108,8 +108,6 @@
             registerButton.Text = "Register";
             registerButton.UseVisualStyleBackColor = true;
             registerButton.Click += registerButton_Click;
-            registerButton.MouseEnter += registerButton_MouseEnter;
-            registerButton.MouseLeave += registerButton_MouseLeave;
             // 
             // userTypeComboBox
             // 

@@ -61,8 +61,6 @@
             registerButton.Text = "Register";
             registerButton.UseVisualStyleBackColor = true;
             registerButton.Click += registerButton_Click;
-            registerButton.MouseEnter += registerButton_MouseEnter;
-            registerButton.MouseLeave += registerButton_MouseLeave;
             // 
             // label7
             // 
@@ -168,8 +166,6 @@
             returnToLoginButton.Text = "Return to Login Page";
             returnToLoginButton.UseVisualStyleBackColor = true;
             returnToLoginButton.Click += returnToLoginButton_Click;
-            returnToLoginButton.MouseEnter += returnToLoginButton_MouseEnter;
-            returnToLoginButton.MouseLeave += returnToLoginButton_MouseLeave;
             // 
             // passwordTextBox
             // 
@@ -201,6 +197,7 @@
             // 
             // passwordAgainTextBox
             // 
+            passwordAgainTextBox.UseSystemPasswordChar = true;
             passwordAgainTextBox.Font = new Font("Palatino Linotype", 15.75F);
             passwordAgainTextBox.Location = new Point(653, 529);
             passwordAgainTextBox.Name = "passwordAgainTextBox";
@@ -209,7 +206,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Resource1.imgbin_eye_icon_eye_iCUuFjfMyPy2dJfgGRCGUqRcX;
+            pictureBox1.Image = Images.imgbin_eye_icon_eye_iCUuFjfMyPy2dJfgGRCGUqRcX;
             pictureBox1.Location = new Point(450, 498);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(42, 28);

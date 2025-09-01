@@ -18,6 +18,8 @@ namespace HospitalAppointmentSystem.Forms
         {
             InitializeComponent();
             this.adminID = adminID;
+            ButtonAnimationHelper.SetupButtonAnimation(ReturnToAdminPageButton);
+            ButtonAnimationHelper.SetupButtonAnimation(ReturnToLoginPageButton);
         }
 
         private Form currentForm;
@@ -54,26 +56,6 @@ namespace HospitalAppointmentSystem.Forms
 
                 listBox1.DataSource = txtList;
             }
-        }
-
-        private void ReturnToAdminPageButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(ReturnToAdminPageButton);
-        }
-
-        private void ReturnToAdminPageButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(ReturnToAdminPageButton);
-        }
-
-        private void ReturnToLoginPageButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(ReturnToLoginPageButton);
-        }
-
-        private void ReturnToLoginPageButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(ReturnToLoginPageButton);
         }
     }
 }

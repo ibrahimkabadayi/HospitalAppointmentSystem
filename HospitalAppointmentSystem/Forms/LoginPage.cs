@@ -12,6 +12,7 @@ namespace HospitalAppointmentSystem
             InitializeComponent();
             var context = new HospitalDbContext();
             _unitOfWork = new UnitOfWork(context);
+            ButtonAnimationHelper.SetupButtonAnimation(registerButton);
         }
 
         private Form currentForm;
@@ -90,16 +91,6 @@ namespace HospitalAppointmentSystem
                 }
 
             }
-        }
-
-        private void registerButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(registerButton);
-        }
-
-        private void registerButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(registerButton);
         }
     }
 }

@@ -22,6 +22,8 @@ namespace HospitalAppointmentSystem.Forms
             this.PatientID = PatientID;
             var context = new HospitalDbContext();
             _unitOfWork = new UnitOfWork(context);
+            ButtonAnimationHelper.SetupButtonAnimation(ReturnToLoginPageButton);
+            ButtonAnimationHelper.SetupButtonAnimation(ReturnToPatientPageButton);
         }
 
         private async void PatientAppointments_Load(object sender, EventArgs e)
@@ -61,26 +63,6 @@ namespace HospitalAppointmentSystem.Forms
                     break;
                 }
             }
-        }
-
-        private void ReturnToPatientPageButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(ReturnToPatientPageButton);
-        }
-
-        private void ReturnToPatientPageButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(ReturnToPatientPageButton);
-        }
-
-        private void ReturnToLoginPageButton_MouseEnter(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseEnter(ReturnToLoginPageButton);
-        }
-
-        private void ReturnToLoginPageButton_MouseLeave(object sender, EventArgs e)
-        {
-            Methods.ButtonMouseLeave(ReturnToLoginPageButton);
         }
     }
 }

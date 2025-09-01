@@ -43,8 +43,6 @@
             ReturnToLoginPageButton.Text = "Return to Login Page";
             ReturnToLoginPageButton.UseVisualStyleBackColor = true;
             ReturnToLoginPageButton.Click += ReturnToLoginPageButton_Click;
-            ReturnToLoginPageButton.MouseEnter += ReturnToLoginPageButton_MouseEnter;
-            ReturnToLoginPageButton.MouseLeave += ReturnToLoginPageButton_MouseLeave;
             // 
             // ReturnToPatientPageButton
             // 
@@ -56,8 +54,6 @@
             ReturnToPatientPageButton.Text = "Return to Patient Page";
             ReturnToPatientPageButton.UseVisualStyleBackColor = true;
             ReturnToPatientPageButton.Click += ReturnToPatientPageButton_Click;
-            ReturnToPatientPageButton.MouseEnter += ReturnToPatientPageButton_MouseEnter;
-            ReturnToPatientPageButton.MouseLeave += ReturnToPatientPageButton_MouseLeave;
             // 
             // flowLayoutPanel1
             // 
