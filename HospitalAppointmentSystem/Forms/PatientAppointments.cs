@@ -25,7 +25,6 @@ namespace HospitalAppointmentSystem.Forms
             ButtonAnimationHelper.SetupButtonAnimation(ReturnToLoginPageButton);
             ButtonAnimationHelper.SetupButtonAnimation(ReturnToPatientPageButton);
         }
-
         private async void PatientAppointments_Load(object sender, EventArgs e)
         {
             var PatientAppointments = await _unitOfWork.Appointments.FindAsync(x => x.PatientID == PatientID);
@@ -46,12 +45,10 @@ namespace HospitalAppointmentSystem.Forms
                 flowLayoutPanel1.Controls.Add(uc);
             }
         }
-
         private void ReturnToPatientPageButton_Click(object sender, EventArgs e)
         {
             Methods.ShowFormAsPanel(new Form3(PatientID), this, ref currentForm);
         }
-
         private void ReturnToLoginPageButton_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)

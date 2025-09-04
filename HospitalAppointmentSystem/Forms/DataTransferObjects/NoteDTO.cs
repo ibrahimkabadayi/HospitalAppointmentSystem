@@ -10,7 +10,6 @@ namespace HospitalAppointmentSystem.Forms.DataTransferObjects
     {
         public string? DoctorNote { get; set; }
         public string? PatientNote { get; set; }
-
         public NoteDTO(string DoctorNote, string PatientNote) 
         {
             this.DoctorNote = DoctorNote;

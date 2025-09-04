@@ -21,7 +21,6 @@ namespace HospitalAppointmentSystem.Forms
             ButtonAnimationHelper.SetupButtonAnimation(ReturnToAdminPageButton);
             ButtonAnimationHelper.SetupButtonAnimation(ReturnToLoginPageButton);
         }
-
         private Form currentForm;
         private void ReturnToLoginPageButton_Click_1(object sender, EventArgs e)
         {
@@ -35,12 +34,10 @@ namespace HospitalAppointmentSystem.Forms
                 }
             }
         }
-
         private void ReturnToAdminPageButton_Click_1(object sender, EventArgs e)
         {
             Methods.ShowFormAsPanel(new Form5(adminID), this, ref currentForm);
         }
-
         private async void AllUsers_Load(object sender, EventArgs e)
         {
             using (UnitOfWork uow = new UnitOfWork(new HospitalDbContext()))

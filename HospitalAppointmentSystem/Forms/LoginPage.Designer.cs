@@ -69,7 +69,6 @@
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(228, 33);
             passwordTextBox.TabIndex = 8;
-            passwordTextBox.Text = "i1b3r9a8";
             // 
             // emailTextBox
             // 
@@ -78,7 +77,6 @@
             emailTextBox.Name = "emailTextBox";
             emailTextBox.Size = new Size(543, 33);
             emailTextBox.TabIndex = 9;
-            emailTextBox.Text = "ibrahimkabadayi190@gmail.com";
             // 
             // label6
             // 
@@ -149,7 +147,6 @@
             nameTextBox.Name = "nameTextBox";
             nameTextBox.Size = new Size(228, 33);
             nameTextBox.TabIndex = 5;
-            nameTextBox.Text = "Ibrahim";
             // 
             // surnameTextBox
             // 
@@ -158,7 +155,6 @@
             surnameTextBox.Name = "surnameTextBox";
             surnameTextBox.Size = new Size(228, 33);
             surnameTextBox.TabIndex = 7;
-            surnameTextBox.Text = "Kabadayi";
             // 
             // LoginPage
             // 

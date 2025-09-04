@@ -21,7 +21,6 @@ namespace HospitalAppointmentSystem.Forms
                 await Task.Delay(15);
             }
         }
-
         public static async void ButtonMouseEnter(Button button) 
         {
             for (int i = 0; i <= 10; i++)
@@ -89,7 +88,7 @@ namespace HospitalAppointmentSystem.Forms
             if (currentForm != null)
             {
                 currentForm.Hide();
-                parentForm.Controls.Remove(currentForm);  // this yerine parentForm
+                parentForm.Controls.Remove(currentForm);
                 currentForm.Close();
                 currentForm.Dispose();
                 currentForm = null;
@@ -98,10 +97,10 @@ namespace HospitalAppointmentSystem.Forms
             currentForm.TopLevel = false;
             currentForm.FormBorderStyle = FormBorderStyle.None;
             currentForm.Dock = DockStyle.Fill;
-            parentForm.Controls.Add(currentForm);  // this yerine parentForm
+            parentForm.Controls.Add(currentForm);
             currentForm.BringToFront();
             currentForm.Show();
-            parentForm.Text = formToShow.Text;  // this yerine parentForm
+            parentForm.Text = formToShow.Text;
         }
     }
 }

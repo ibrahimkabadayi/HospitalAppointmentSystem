@@ -32,7 +32,6 @@ namespace HospitalAppointmentSystem.Forms
             else
                 noteTextBox.Text = noteDTO.PatientNote;
         }
-
         private void button1_Click(object sender, EventArgs e)//Delete Button
         {
             noteTextBox.Text = string.Empty;
@@ -41,7 +40,6 @@ namespace HospitalAppointmentSystem.Forms
             else 
                 noteDTO.PatientNote = string.Empty;
         }
-
         private void button2_Click(object sender, EventArgs e)//Save and Close button
         {
             if(isDoctor)

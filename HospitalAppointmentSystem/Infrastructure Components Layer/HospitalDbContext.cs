@@ -17,7 +17,6 @@ namespace HospitalAppointmentSystem
         public DbSet<WorkingHours> WorkingHours { get; set; }
         public DbSet<Admins> Admins { get; set; }
         public DbSet<Users> Users { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             _ = optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=HospitalDB;Integrated Security=SSPI;");

@@ -23,13 +23,11 @@ namespace HospitalAppointmentSystem.Forms
             _unitOfWork = new UnitOfWork(context);
             ButtonAnimationHelper.SetupButtonAnimation(button1);
         }
-
         private async void Form2_Load(object sender, EventArgs e)
         {
             var doc = await _unitOfWork.Doctors.GetByIdAsync(doctorID);
             titleLabel.Text = "Welcome doctor " + doc.Name + " " + doc.Surname + "!";
         }
-
         private async void button1_Click(object sender, EventArgs e)
         {
 

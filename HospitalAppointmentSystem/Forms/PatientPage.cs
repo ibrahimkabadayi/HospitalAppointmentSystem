@@ -42,7 +42,6 @@ namespace HospitalAppointmentSystem.Forms
 
             branchesListBox.DataSource = branchestxt;
         }
-
         private async void brachesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedBranch = branchesListBox.SelectedItems[0];
@@ -60,7 +59,6 @@ namespace HospitalAppointmentSystem.Forms
 
             doctorsListBox.DataSource = doctortxt;
         }
-
         private async void doctorsTextBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (branchesListBox.SelectedIndex == -1) { return; }
@@ -110,12 +108,10 @@ namespace HospitalAppointmentSystem.Forms
                 timeListBox.Items.Add(hours[i].ToShortTimeString());
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Methods.ShowFormAsPanel(new PatientAppointments(patientID), this, ref currentForm);
         }
-
         private async void appointButton_Click(object sender, EventArgs e)
         {
             string dateEntered = dateTextBox.Text.Trim();

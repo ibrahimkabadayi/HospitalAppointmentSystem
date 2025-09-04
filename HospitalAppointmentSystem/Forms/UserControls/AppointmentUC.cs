@@ -113,7 +113,6 @@ namespace HospitalAppointmentSystem.Forms
         {
             Methods.ImageMouseLeave(docCommentPictureBox);
         }
-
         private void patientCommentPictureBox_Click(object sender, EventArgs e)//Take this as "ShowNonChangableNote_Click" 
         {
             Form popup = new Form();
@@ -129,7 +128,6 @@ namespace HospitalAppointmentSystem.Forms
             popup.Controls.Add(noteUC);
             popup.ShowDialog();
         }
-
         private void AppointmentUC_Load(object sender, EventArgs e)
         {
             if (isAdmin) return;

@@ -11,6 +11,7 @@ namespace HospitalAppointmentSystem
         private readonly IUnitOfWork _unitOfWork;
         private bool isNoPasswordDoctor = false;
         private int doctorIDWithNoPassword = 0;
+        private int number = 0;
         public LoginPage()
         {
             InitializeComponent();
@@ -43,8 +44,7 @@ namespace HospitalAppointmentSystem
         }
         private async void registerButton_Click(object sender, EventArgs e)
         {
-
-            if (isNoPasswordDoctor) 
+            if (isNoPasswordDoctor && number == 0) 
             {
                 string newPassword = passwordTextBox.Text.Trim();
 
@@ -54,13 +54,19 @@ namespace HospitalAppointmentSystem
                     return;
                 }
 
+                var user = await _unitOfWork.Users.FindAsync(x => x.UserTypeID == doctorIDWithNoPassword);
+                user.First().Password = newPassword;
+                await _unitOfWork.Users.UpdateAsync(user.First());
+                await _unitOfWork.SaveChangesAsync();
+
                 var doctor = await _unitOfWork.Doctors.GetByIdAsync(doctorIDWithNoPassword);
                 doctor.Password = newPassword;
                 await _unitOfWork.Doctors.UpdateAsync(doctor);
                 await _unitOfWork.SaveChangesAsync();
 
                 MessageBox.Show("Password is succesfully registired now enter with your new password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                number++;
+                return;
             }
 
             string name = nameTextBox.Text.Trim();
@@ -68,29 +74,62 @@ namespace HospitalAppointmentSystem
             string userType = userTypeComboBox.Text.Trim();
             string password = passwordTextBox.Text.Trim();
             string email = emailTextBox.Text.Trim();
-            
-            if(!(name.Length == 0 || surname.Length == 0 || userType.Length == 0 || email.Length == 0 || !email.Contains("@"))
-                && (await _unitOfWork.Doctors.FindAsync(x => x.Name.Equals(name) && x.Surname.Equals(surname) && x.Email.Equals(email) && x.Password == "")).Count > 0) 
-            {
-                DialogResult result = MessageBox.Show("It seems like you have no password registired in the system." +
-                    " Would you want to register a password?",
-                    "Question",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
 
-                if (result == DialogResult.Yes)
+            MessageBox.Show("Pass check start here, password is " + password);
+
+            bool allFieldsFilled = !string.IsNullOrEmpty(name) &&
+                                  !string.IsNullOrEmpty(surname) &&
+                                  !string.IsNullOrEmpty(userType) &&
+                                  !string.IsNullOrEmpty(email) &&
+                                  email.Contains('@');
+
+            if (allFieldsFilled)
+            {              
+                var doctorsWithoutPassword = await _unitOfWork.Doctors.FindAsync(x =>
+                    x.Name == name &&
+                    x.Surname == surname &&
+                    x.Email == email &&
+                    (x.Password == null || x.Password == ""));
+
+                MessageBox.Show("Field check happened here");
+
+                if (doctorsWithoutPassword.Count > 0)
                 {
-                    isNoPasswordDoctor = true;
-                    doctorIDWithNoPassword = (await _unitOfWork.Doctors.FindAsync(x => x.Name.Equals(name) && x.Surname.Equals(surname) && x.Email.Equals(email) && x.Password.IsNullOrEmpty())).First().ID;
-                    return;
+                    DialogResult result = MessageBox.Show("It seems like you have no password registered in the system." +
+                        " Would you want to register a password?",
+                        "Question",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        isNoPasswordDoctor = true;
+                        doctorIDWithNoPassword = doctorsWithoutPassword.First().ID;
+                        MessageBox.Show("Password registration process will continue...");
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login cancelled.");
+                        return;
+                    }
                 }
-                return;
+                else
+                {
+                    MessageBox.Show("Doctor not found or password already exists.");
+                    isNoPasswordDoctor = false;
+                    number = 0;
+                    doctorIDWithNoPassword = 0;
+                }
             }
-            else 
+            else
             {
+                MessageBox.Show("Please fill all required fields correctly.");
                 isNoPasswordDoctor = false;
                 doctorIDWithNoPassword = 0;
             }
+
+            MessageBox.Show("Pass Check end here");
 
             if (name.Length == 0 || surname.Length == 0 || userType.Length == 0 || password.Length == 0 || email.Length == 0 || !email.Contains("@"))
             {

@@ -84,7 +84,7 @@ namespace HospitalAppointmentSystem.Forms
             int doctorCount = (await _unitOfWork.Doctors.GetAllAsync()).Count;
             int UserCount = (await _unitOfWork.Users.GetAllAsync()).Count;
 
-            var doctor = new Doctors { ID = doctorCount + 1 ,Name = name, Surname = surname, BranchID = branchID, WorkingHoursID = workingHoursID };
+            var doctor = new Doctors { ID = doctorCount + 1 ,Name = name, Email = email, Surname = surname, BranchID = branchID, WorkingHoursID = workingHoursID };
             await _unitOfWork.Doctors.AddAsync(doctor);
             await _unitOfWork.SaveChangesAsync();
 
@@ -94,6 +94,8 @@ namespace HospitalAppointmentSystem.Forms
 
             await _unitOfWork.Users.AddAsync(newUser);
             await _unitOfWork.SaveChangesAsync();
+
+            performLoadForListBox(doctorsList);
         }
 
         private async void button2_Click(object sender, EventArgs e) //Delete Button
@@ -109,7 +111,12 @@ namespace HospitalAppointmentSystem.Forms
 
             int doctorID = Convert.ToInt32(array[0]);
 
+            int userID = (await _unitOfWork.Users.FindAsync(x => x.UserTypeID == doctorID && x.UserType == "Doctor")).First().ID;
+
             await _unitOfWork.Doctors.DeleteAsync(doctorID);
+            await _unitOfWork.SaveChangesAsync();
+
+            await _unitOfWork.Users.DeleteAsync(userID);
             await _unitOfWork.SaveChangesAsync();
 
             performLoadForListBox(doctorsList);
@@ -131,8 +138,12 @@ namespace HospitalAppointmentSystem.Forms
             Methods.ShowFormAsPanel(new Form4(doctorID, adminId), this, ref currentForm);
         }
 
-        private void Form5_Load(object sender, EventArgs e)
+        private async void Form5_Load(object sender, EventArgs e)
         {
+            var admin = await _unitOfWork.Admins.GetByIdAsync(adminId);
+            titleLabel.Text = "Welcome " + admin.Name + " " + admin.Surname + "!";
+            doctorsList.SelectedItems.Clear();
+
             performLoadForListBox(doctorsList);
         }
 
@@ -150,7 +161,7 @@ namespace HospitalAppointmentSystem.Forms
 
                 var time = await _unitOfWork.WorkingHours.GetByIdAsync(doctor.WorkingHoursID);
 
-                displayText += doctor.Name + "  " + doctor.Surname + "  " + branch.Name + "  "
+                displayText += doctor.ID +  "  " + doctor.Name + "  " + doctor.Surname + "  " + branch.Name + "  "
                      + time.StartTime.ToString() + "-" + time.EndTime.ToString();
 
                 txtList.Add(displayText);

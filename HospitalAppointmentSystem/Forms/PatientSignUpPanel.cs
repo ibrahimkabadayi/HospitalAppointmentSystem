@@ -14,7 +14,6 @@ namespace HospitalAppointmentSystem.Forms
             ButtonAnimationHelper.SetupButtonAnimation(registerButton);
             ButtonAnimationHelper.SetupButtonAnimation(returnToLoginButton);
         }
-
         private async void registerButton_Click(object sender, EventArgs e)
         {
             string name = nameTextBox.Text.Trim();
@@ -104,6 +103,7 @@ namespace HospitalAppointmentSystem.Forms
         }
 
         private bool isPasswordVisible = true;
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             if (isPasswordVisible)

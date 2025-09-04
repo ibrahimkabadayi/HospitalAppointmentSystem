@@ -16,7 +16,6 @@ namespace HospitalAppointmentSystem.Forms
         int doctorID;
         int adminID;
         private Form currentForm;
-
         public Form4(int doctorID, int adminID)
         {
             InitializeComponent();
@@ -25,7 +24,6 @@ namespace HospitalAppointmentSystem.Forms
             ButtonAnimationHelper.SetupButtonAnimation(ReturnToAdminPageButton);
             ButtonAnimationHelper.SetupButtonAnimation(ReturnToLoginPageButton);
         }
-
         private async void Form4_Load(object sender, EventArgs e)
         {
             using (var uow = new UnitOfWork(new HospitalDbContext()))
@@ -62,7 +60,6 @@ namespace HospitalAppointmentSystem.Forms
                 }
             }
         }
-
         private void ReturnToAdminPageButton_Click(object sender, EventArgs e)
         {
             Methods.ShowFormAsPanel(new Form5(adminID), this, ref currentForm);

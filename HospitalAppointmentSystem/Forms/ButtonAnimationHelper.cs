@@ -9,17 +9,11 @@ namespace HospitalAppointmentSystem.Forms
 {
     internal static class ButtonAnimationHelper
     {
-        // Aktif animasyonları takip etmek için
         private static readonly ConcurrentDictionary<Button, CancellationTokenSource> _activeAnimations
             = new ConcurrentDictionary<Button, CancellationTokenSource>();
 
-        // Varsayılan renkler - Modern ve şık
-        private static readonly Color DefaultHoverColor = Color.FromArgb(74, 144, 226);   // Güzel mavi
+        private static readonly Color DefaultHoverColor = Color.FromArgb(74, 144, 226);   
         private static readonly Color DefaultNormalColor = SystemColors.Control;
-
-        /// <summary>
-        /// Mouse enter animasyonu - daha yumuşak ve hızlı
-        /// </summary>
         public static async Task ButtonMouseEnterAsync(Button button,
             Color? targetColor = null,
             int durationMs = 200,
@@ -30,10 +24,6 @@ namespace HospitalAppointmentSystem.Forms
             Color target = targetColor ?? DefaultHoverColor;
             await AnimateColorTransition(button, target, durationMs, steps);
         }
-
-        /// <summary>
-        /// Mouse leave animasyonu - daha yumuşak ve hızlı
-        /// </summary>
         public static async Task ButtonMouseLeaveAsync(Button button,
             Color? targetColor = null,
             int durationMs = 200,
@@ -44,20 +34,14 @@ namespace HospitalAppointmentSystem.Forms
             Color target = targetColor ?? DefaultNormalColor;
             await AnimateColorTransition(button, target, durationMs, steps);
         }
-
-        /// <summary>
-        /// Ana animasyon methodu - cancellation token ile
-        /// </summary>
         private static async Task AnimateColorTransition(Button button, Color targetColor, int durationMs, int steps)
         {
-            // Önceki animasyonu iptal et
             if (_activeAnimations.TryRemove(button, out var oldCts))
             {
                 oldCts?.Cancel();
                 oldCts?.Dispose();
             }
 
-            // Yeni cancellation token oluştur
             var cts = new CancellationTokenSource();
             _activeAnimations[button] = cts;
 
@@ -68,18 +52,15 @@ namespace HospitalAppointmentSystem.Forms
 
                 for (int i = 0; i <= steps; i++)
                 {
-                    // Cancellation kontrolü
                     if (cts.Token.IsCancellationRequested) return;
                     if (button.IsDisposed) return;
 
                     float progress = (float)i / steps;
 
-                    // Easing function (ease-out effect için)
                     progress = 1f - (float)Math.Pow(1 - progress, 3);
 
                     Color currentColor = InterpolateColor(startColor, targetColor, progress);
 
-                    // UI thread'de çalıştır
                     if (button.InvokeRequired)
                     {
                         button.Invoke(new Action(() => button.BackColor = currentColor));
@@ -89,7 +70,7 @@ namespace HospitalAppointmentSystem.Forms
                         button.BackColor = currentColor;
                     }
 
-                    if (i < steps) // Son adımda delay yapma
+                    if (i < steps) 
                     {
                         await Task.Delay(stepDelay, cts.Token);
                     }
@@ -97,26 +78,19 @@ namespace HospitalAppointmentSystem.Forms
             }
             catch (OperationCanceledException)
             {
-                // Animasyon iptal edildi, normal durum
             }
             catch (ObjectDisposedException)
             {
-                // Button dispose edilmiş
             }
             finally
             {
-                // Cleanup
                 _activeAnimations.TryRemove(button, out _);
                 cts?.Dispose();
             }
         }
-
-        /// <summary>
-        /// İki renk arasında interpolasyon yapar
-        /// </summary>
         private static Color InterpolateColor(Color start, Color end, float progress)
         {
-            progress = Math.Max(0f, Math.Min(1f, progress)); // 0-1 arasında sınırla
+            progress = Math.Max(0f, Math.Min(1f, progress));
 
             int r = (int)(start.R + (end.R - start.R) * progress);
             int g = (int)(start.G + (end.G - start.G) * progress);
@@ -126,9 +100,6 @@ namespace HospitalAppointmentSystem.Forms
             return Color.FromArgb(a, r, g, b);
         }
 
-        /// <summary>
-        /// Button için kolay setup methodu
-        /// </summary>
         public static void SetupButtonAnimation(Button button,
             Color? hoverColor = null,
             Color? normalColor = null,
@@ -137,17 +108,12 @@ namespace HospitalAppointmentSystem.Forms
             Color hover = hoverColor ?? DefaultHoverColor;
             Color normal = normalColor ?? DefaultNormalColor;
 
-            // Başlangıç rengini ayarla
             button.BackColor = normal;
 
-            // Event handler'ları ekle
             button.MouseEnter += async (s, e) => await ButtonMouseEnterAsync(button, hover, animationDuration);
             button.MouseLeave += async (s, e) => await ButtonMouseLeaveAsync(button, normal, animationDuration);
         }
 
-        /// <summary>
-        /// Tüm aktif animasyonları temizle (form kapatılırken kullanılabilir)
-        /// </summary>
         public static void ClearAllAnimations()
         {
             foreach (var kvp in _activeAnimations)

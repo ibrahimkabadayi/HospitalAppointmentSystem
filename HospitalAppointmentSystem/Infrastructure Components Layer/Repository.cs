@@ -12,7 +12,6 @@ namespace HospitalAppointmentSystem
     {
         private readonly HospitalDbContext _context;
         private readonly DbSet<T> _dbSet;
-
         public Repository(HospitalDbContext context) 
         {
             _context = context;
@@ -24,7 +23,6 @@ namespace HospitalAppointmentSystem
             await _context.SaveChangesAsync();
             return entity;
         }
-
         public async Task<bool> DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
@@ -34,7 +32,6 @@ namespace HospitalAppointmentSystem
             await _context.SaveChangesAsync();
             return true;
         }
-
         public async Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
             try 
@@ -46,12 +43,10 @@ namespace HospitalAppointmentSystem
                 throw ex;
             }
         }
-
         public async Task<List<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
-
         public async Task<T> GetByIdAsync(int id)
         {
             try
@@ -66,7 +61,6 @@ namespace HospitalAppointmentSystem
                 return null;
             }
         }
-
         public async Task<T> UpdateAsync(T entity)
         {
             _dbSet.Update(entity);

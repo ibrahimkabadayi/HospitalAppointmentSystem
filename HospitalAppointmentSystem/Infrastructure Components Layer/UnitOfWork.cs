@@ -18,7 +18,6 @@ namespace HospitalAppointmentSystem
         private IRepository<WorkingHours> _WorkingHours;
         private IRepository<Admins> _Admins;
         private IRepository<Users> _Users;
-
         public UnitOfWork(HospitalDbContext context)
         {
             _context = context;
