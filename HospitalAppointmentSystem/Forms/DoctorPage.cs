@@ -24,19 +24,17 @@ namespace HospitalAppointmentSystem.Forms
             ButtonAnimationHelper.SetupButtonAnimation(button1);
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private async void Form2_Load(object sender, EventArgs e)
         {
-            var doc = _unitOfWork.Doctors.GetByIdAsync(doctorID);
-            Doctors docObject = doc.Result;
-            titleLabel.Text = "Welcome doctor " + docObject.Name + " " + docObject.Surname + "!";
+            var doc = await _unitOfWork.Doctors.GetByIdAsync(doctorID);
+            titleLabel.Text = "Welcome doctor " + doc.Name + " " + doc.Surname + "!";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
 
-            var allAppointments = _unitOfWork.Appointments.FindAsync(x => x.DoctorID == doctorID && x.date.ToString().Equals(dateTextBox.Text));
-            List<Appointments> appointments = allAppointments.Result;
-
+            var appointments = await _unitOfWork.Appointments.FindAsync(x => x.DoctorID == doctorID && x.date.ToString().Equals(dateTextBox.Text));
+            
             for(int i = 0; i < appointments.Count; i++) 
             {
                 Appointments app = appointments[i];

@@ -28,26 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
             noteTextBox = new RichTextBox();
             SuspendLayout();
             // 
-            // button1
-            // 
-            button1.Location = new Point(0, 201);
-            button1.Name = "button1";
-            button1.Size = new Size(257, 41);
-            button1.TabIndex = 3;
-            button1.Text = "Close";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // noteTextBox
             // 
+            noteTextBox.BackColor = SystemColors.ActiveCaption;
             noteTextBox.Location = new Point(0, 0);
             noteTextBox.Name = "noteTextBox";
             noteTextBox.ReadOnly = true;
-            noteTextBox.Size = new Size(257, 203);
+            noteTextBox.Size = new Size(257, 195);
             noteTextBox.TabIndex = 2;
             noteTextBox.Text = "";
             // 
@@ -55,17 +45,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(button1);
             Controls.Add(noteTextBox);
             Name = "ShowNoteUC";
-            Size = new Size(256, 242);
+            Size = new Size(258, 194);
             Load += ShowNoteUC_Load;
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Button button1;
         private RichTextBox noteTextBox;
     }
 }

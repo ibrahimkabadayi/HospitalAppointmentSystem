@@ -15,6 +15,5 @@ namespace HospitalAppointmentSystem
         Task<T> UpdateAsync(T entity);
         Task<bool> DeleteAsync(int id);
         Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate);
-        Task<bool> CheckUserAsync(T entity);
     }
 }

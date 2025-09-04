@@ -63,7 +63,7 @@ namespace HospitalAppointmentSystem.Forms
             Form popup = new Form();
             popup.FormBorderStyle = FormBorderStyle.FixedDialog;
             popup.StartPosition = FormStartPosition.CenterParent;
-            popup.Size = new Size(260, 245); 
+            popup.Size = new Size(260, 230); 
             popup.MaximizeBox = false;
             popup.MinimizeBox = false;
 
@@ -119,7 +119,7 @@ namespace HospitalAppointmentSystem.Forms
             Form popup = new Form();
             popup.FormBorderStyle = FormBorderStyle.FixedDialog;
             popup.StartPosition = FormStartPosition.CenterParent;
-            popup.Size = new Size(256, 242);
+            popup.Size = new Size(256, 230);
             popup.MaximizeBox = false;
             popup.MinimizeBox = false;
 
@@ -158,7 +158,7 @@ namespace HospitalAppointmentSystem.Forms
         }
         private void ShowAddNote(NoteDTO noteDTO)
         {
-            var addNote = new AddNoteUC(noteDTO, true); 
+            var addNote = new AddNoteUC(noteDTO, isDoctor); 
             addNote.Dock = DockStyle.Fill;
 
             addNote.OnNoteSave += async (savedNote) =>

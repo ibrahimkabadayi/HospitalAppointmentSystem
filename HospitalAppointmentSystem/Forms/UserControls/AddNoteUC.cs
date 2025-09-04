@@ -50,9 +50,6 @@ namespace HospitalAppointmentSystem.Forms
                 noteDTO.PatientNote = noteTextBox.Text;
 
             OnNoteSave?.Invoke(noteDTO);
-
-            Hide();
-            Dispose();
         }
     }
 }

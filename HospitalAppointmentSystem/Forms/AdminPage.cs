@@ -44,9 +44,13 @@ namespace HospitalAppointmentSystem.Forms
                 return;
             }
 
-            var user = new Users { Name = name, Surname = surname, Email = email, UserType = "Doctor"};
+            
+            var UsersInList = await _unitOfWork.Users.FindAsync(s => s.Name == name &&
+                s.Surname == surname &&
+                s.Email == email);
 
-            if (!await _unitOfWork.Users.CheckUserAsync(user)) 
+
+            if (UsersInList.Count > 0) 
             {
                 MessageBox.Show("This doctor already exist in the list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -60,6 +64,7 @@ namespace HospitalAppointmentSystem.Forms
             TimeOnly endTimeOb = new TimeOnly(Convert.ToInt32(endTime[0]), Convert.ToInt32(endTime[1]));
 
             var workingHoursOb = await _unitOfWork.WorkingHours.FindAsync(x => (x.StartTime.Equals(startTimeOb) && x.EndTime.Equals(endTimeOb)));
+
             var branchOb = await _unitOfWork.Branches.FindAsync(x => x.Name.Equals(branch));
 
             int branchID;
@@ -76,9 +81,18 @@ namespace HospitalAppointmentSystem.Forms
                 return;
             }
 
+            int doctorCount = (await _unitOfWork.Doctors.GetAllAsync()).Count;
+            int UserCount = (await _unitOfWork.Users.GetAllAsync()).Count;
 
-            var doctor = new Doctors { Name = name, Surname = surname, BranchID = branchID, WorkingHoursID = workingHoursID };
+            var doctor = new Doctors { ID = doctorCount + 1 ,Name = name, Surname = surname, BranchID = branchID, WorkingHoursID = workingHoursID };
             await _unitOfWork.Doctors.AddAsync(doctor);
+            await _unitOfWork.SaveChangesAsync();
+
+            var registeredDoctor = await _unitOfWork.Doctors.FindAsync(x => x.Name.Equals(name) && x.Surname.Equals(surname) && x.WorkingHoursID == workingHoursID);
+
+            var newUser = new Users {ID = UserCount + 1, Name = name, Surname = surname, Email = email, UserType = "Doctor", UserTypeID = registeredDoctor.First().ID};
+
+            await _unitOfWork.Users.AddAsync(newUser);
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -105,7 +119,7 @@ namespace HospitalAppointmentSystem.Forms
         {
             if (doctorsList.SelectedItems.Count == 0 || doctorsList.SelectedItem == null)
             {
-                MessageBox.Show("Please Select a doctor to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please Select a doctor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -130,14 +144,14 @@ namespace HospitalAppointmentSystem.Forms
             for (int i = 0; i < list.Count; i++)
             {
                 var doctor = list[i];
-                string displayText = string.Empty;
+                string displayText = "";
 
-                var branch = _unitOfWork.Branches.GetByIdAsync(doctor.BranchID);
+                var branch = await _unitOfWork.Branches.GetByIdAsync(doctor.BranchID);
 
-                var time = _unitOfWork.WorkingHours.GetByIdAsync(doctor.WorkingHoursID);
+                var time = await _unitOfWork.WorkingHours.GetByIdAsync(doctor.WorkingHoursID);
 
-                displayText += doctor.ID + " " + doctor.Name + " " + doctor.Surname + " " + branch.Result.Name
-                     + time.Result.StartTime.ToString() + "-" + time.Result.EndTime.ToString();
+                displayText += doctor.Name + "  " + doctor.Surname + "  " + branch.Name + "  "
+                     + time.StartTime.ToString() + "-" + time.EndTime.ToString();
 
                 txtList.Add(displayText);
             }

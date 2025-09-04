@@ -154,10 +154,11 @@
             // 
             // timeComboBox
             // 
+            timeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             timeComboBox.Font = new Font("Palatino Linotype", 15.75F);
             timeComboBox.FormattingEnabled = true;
             timeComboBox.Items.AddRange(new object[] { "08:00 - 16:00", "09:00 - 17:00", "10:00 - 18:00", "11:00 - 19:00", "12:00 - 20:00", "13:00 - 21:00", "14:00 - 22:00", "15:00 - 23:00", "16:00 - 00:00", "" });
-            timeComboBox.Location = new Point(169, 513);
+            timeComboBox.Location = new Point(21, 350);
             timeComboBox.Name = "timeComboBox";
             timeComboBox.Size = new Size(202, 36);
             timeComboBox.TabIndex = 10;
@@ -165,15 +166,15 @@
             // emailTextBox
             // 
             emailTextBox.Font = new Font("Palatino Linotype", 15.75F);
-            emailTextBox.Location = new Point(21, 360);
+            emailTextBox.Location = new Point(21, 499);
             emailTextBox.Name = "emailTextBox";
-            emailTextBox.Size = new Size(181, 36);
+            emailTextBox.Size = new Size(501, 36);
             emailTextBox.TabIndex = 9;
             // 
             // branchTextBox
             // 
             branchTextBox.Font = new Font("Palatino Linotype", 15.75F);
-            branchTextBox.Location = new Point(341, 360);
+            branchTextBox.Location = new Point(341, 350);
             branchTextBox.Name = "branchTextBox";
             branchTextBox.Size = new Size(181, 36);
             branchTextBox.TabIndex = 8;
@@ -200,7 +201,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Palatino Linotype", 15.75F);
-            label5.Location = new Point(21, 329);
+            label5.Location = new Point(21, 468);
             label5.Name = "label5";
             label5.Size = new Size(68, 28);
             label5.TabIndex = 5;
@@ -210,7 +211,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Palatino Linotype", 15.75F);
-            label4.Location = new Point(341, 329);
+            label4.Location = new Point(341, 319);
             label4.Name = "label4";
             label4.Size = new Size(80, 28);
             label4.TabIndex = 4;
@@ -230,7 +231,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Palatino Linotype", 15.75F);
-            label2.Location = new Point(169, 482);
+            label2.Location = new Point(21, 319);
             label2.Name = "label2";
             label2.Size = new Size(158, 28);
             label2.TabIndex = 2;

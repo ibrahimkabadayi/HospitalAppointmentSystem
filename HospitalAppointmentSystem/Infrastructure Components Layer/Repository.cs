@@ -25,29 +25,6 @@ namespace HospitalAppointmentSystem
             return entity;
         }
 
-        public async Task<bool> CheckUserAsync(T entity)
-        {
-            try
-            {
-                if (entity == null) return false;
-                var entityType = typeof(T);
-                var idProperty = entityType.GetProperty("ID");
-
-                if (idProperty == null)
-                    return false;
-
-                var idValue = idProperty.GetValue(entity);
-                if (idValue == null) return false;
-
-                var existingEntity = await _dbSet.FindAsync(idValue);
-                return existingEntity != null;
-            }
-            catch (Exception ex) 
-            {
-                return false;
-            }
-        }
-
         public async Task<bool> DeleteAsync(int id)
         {
             var entity = await GetByIdAsync(id);
@@ -60,7 +37,14 @@ namespace HospitalAppointmentSystem
 
         public async Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _dbSet.Where(predicate).ToListAsync();
+            try 
+            {
+                return await _dbSet.Where(predicate).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<List<T>> GetAllAsync()

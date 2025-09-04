@@ -57,7 +57,7 @@
             button2.Name = "button2";
             button2.Size = new Size(131, 44);
             button2.TabIndex = 2;
-            button2.Text = "Save and Close";
+            button2.Text = "Save ";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -69,7 +69,7 @@
             Controls.Add(deleteButton);
             Controls.Add(noteTextBox);
             Name = "AddNoteUC";
-            Size = new Size(260, 245);
+            Size = new Size(257, 246);
             Load += AddNoteUC_Load;
             ResumeLayout(false);
         }

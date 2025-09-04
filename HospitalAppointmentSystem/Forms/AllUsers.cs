@@ -50,7 +50,7 @@ namespace HospitalAppointmentSystem.Forms
 
                 foreach (Users user in users)
                 {
-                    string displayText = user.ID + " " + user.Name + " " + user.Surname + " " + user.Email;
+                    string displayText = user.Name + "  " + user.Surname + "  " + user.Email + "  " + user.UserType + "  " + user.UserTypeID;
                     txtList.Add(displayText);
                 }
 

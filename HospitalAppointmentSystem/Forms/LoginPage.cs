@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using HospitalAppointmentSystem.Forms;
 using HospitalAppointmentSystem.Model_Classes;
 using Microsoft.IdentityModel.Tokens;
@@ -69,7 +70,7 @@ namespace HospitalAppointmentSystem
             string email = emailTextBox.Text.Trim();
             
             if(!(name.Length == 0 || surname.Length == 0 || userType.Length == 0 || email.Length == 0 || !email.Contains("@"))
-                && (await _unitOfWork.Doctors.FindAsync(x => x.Name.Equals(name) && x.Surname.Equals(surname) && x.Email.Equals(email) && x.Password.IsNullOrEmpty())).Count > 0) 
+                && (await _unitOfWork.Doctors.FindAsync(x => x.Name.Equals(name) && x.Surname.Equals(surname) && x.Email.Equals(email) && x.Password == "")).Count > 0) 
             {
                 DialogResult result = MessageBox.Show("It seems like you have no password registired in the system." +
                     " Would you want to register a password?",
@@ -97,9 +98,18 @@ namespace HospitalAppointmentSystem
                 return;
             }
 
-            var user = new Users { Name = name, Password = password, Email = email };
+            var UsersInList = await _unitOfWork.Users.FindAsync(s => s.Name == name &&
+                s.Surname == surname &&
+                s.Email == email &&
+                s.Password == password);
 
-            if (!await _unitOfWork.Users.CheckUserAsync(user))
+            if(UsersInList == null) 
+            {
+                MessageBox.Show("NULL.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
+            }
+
+            if (!(UsersInList.Count > 0))
             {
                 DialogResult result = MessageBox.Show("It seems like you did not registered in the system," +
                     "Would you like to sign up an a patient?",
@@ -116,24 +126,32 @@ namespace HospitalAppointmentSystem
             }
             else
             {
-                var UsersInList = await _unitOfWork.Users.FindAsync(s => s.Name == name &&
-                s.Surname == surname &&
-                s.Email == email &&
-                s.Password == password);
-
-                var UserInServer = UsersInList.FirstOrDefault();
+             
+                int ID = UsersInList.FirstOrDefault().UserTypeID;
+                MessageBox.Show($"UserTypeID: {ID}, UserType: {userType}");
 
                 if (userType.Equals("Doctor"))
                 {
-                    Methods.ShowFormAsPanel(new Form2(UserInServer.UserTypeID), this, ref currentForm);
+                    try
+                    {
+                        MessageBox.Show("Creating Form2...");
+                        var doctorForm = new Form2(ID);
+                        MessageBox.Show("Form2 created, showing...");
+                        Methods.ShowFormAsPanel(doctorForm, this, ref currentForm);
+                        MessageBox.Show("Form2 shown");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
                 }
                 else if (userType.Equals("Admin"))
                 {
-                    Methods.ShowFormAsPanel(new Form5(UserInServer.UserTypeID), this, ref currentForm);
+                    Methods.ShowFormAsPanel(new Form5(ID), this, ref currentForm);
                 }
                 else
                 {
-                    Methods.ShowFormAsPanel(new Form3(UserInServer.UserTypeID), this, ref currentForm);
+                    Methods.ShowFormAsPanel(new Form3(ID), this, ref currentForm);
                 }
 
             }

@@ -1,4 +1,6 @@
 ﻿
+using HospitalAppointmentSystem.Model_Classes;
+
 namespace HospitalAppointmentSystem.Forms
 {
     public partial class PatientSignUpPanel : Form
@@ -53,7 +55,11 @@ namespace HospitalAppointmentSystem.Forms
 
             DateOnly date = new DateOnly(day, month, year);
 
-            var newPatient = new Patients { 
+            int patientCount = (await _unitOfWork.Patients.GetAllAsync()).Count();
+
+            var newPatient = new Patients 
+            { 
+                ID = patientCount + 1,
                 Name = name,
                 BirthDate = date,
                 Surname = surname, 
@@ -65,6 +71,22 @@ namespace HospitalAppointmentSystem.Forms
 
             await _unitOfWork.Patients.AddAsync(newPatient);
             await _unitOfWork.SaveChangesAsync();
+
+            var registiredPatient = await _unitOfWork.Patients.FindAsync(x => x.SSN == ssn);
+
+            var newUser = new Users
+            {
+                Name = name,
+                Surname = surname,
+                Email = email,
+                Password = password,
+                UserType = "Patient",
+                UserTypeID = registiredPatient.First().ID
+            };
+
+            await _unitOfWork.Users.AddAsync(newUser);
+            await _unitOfWork.SaveChangesAsync();
+
             MessageBox.Show("A new patient has been added.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
