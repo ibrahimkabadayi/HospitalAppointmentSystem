@@ -21,5 +21,37 @@ namespace HospitalAppointmentSystem
         {
             _ = optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=HospitalDB;Integrated Security=SSPI;");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Appointments>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Branches>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Doctors>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Patients>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<WorkingHours>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Admins>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Users>()
+                .Property(e => e.ID)
+                .ValueGeneratedOnAdd();
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -81,16 +81,13 @@ namespace HospitalAppointmentSystem.Forms
                 return;
             }
 
-            int doctorCount = (await _unitOfWork.Doctors.GetAllAsync()).Count;
-            int UserCount = (await _unitOfWork.Users.GetAllAsync()).Count;
-
-            var doctor = new Doctors { ID = doctorCount + 1 ,Name = name, Email = email, Surname = surname, BranchID = branchID, WorkingHoursID = workingHoursID };
+            var doctor = new Doctors {Name = name, Email = email, Surname = surname, BranchID = branchID, WorkingHoursID = workingHoursID };
             await _unitOfWork.Doctors.AddAsync(doctor);
             await _unitOfWork.SaveChangesAsync();
 
             var registeredDoctor = await _unitOfWork.Doctors.FindAsync(x => x.Name.Equals(name) && x.Surname.Equals(surname) && x.WorkingHoursID == workingHoursID);
 
-            var newUser = new Users {ID = UserCount + 1, Name = name, Surname = surname, Email = email, UserType = "Doctor", UserTypeID = registeredDoctor.First().ID};
+            var newUser = new Users {Name = name, Surname = surname, Email = email, UserType = "Doctor", UserTypeID = registeredDoctor.First().ID};
 
             await _unitOfWork.Users.AddAsync(newUser);
             await _unitOfWork.SaveChangesAsync();

@@ -54,11 +54,8 @@ namespace HospitalAppointmentSystem.Forms
 
             DateOnly date = new DateOnly(day, month, year);
 
-            int patientCount = (await _unitOfWork.Patients.GetAllAsync()).Count();
-
             var newPatient = new Patients 
             { 
-                ID = patientCount + 1,
                 Name = name,
                 BirthDate = date,
                 Surname = surname, 

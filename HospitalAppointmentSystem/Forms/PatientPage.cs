@@ -29,13 +29,15 @@ namespace HospitalAppointmentSystem.Forms
 
         private async void Form3_Load(object sender, EventArgs e)
         {
+            dateTextBox.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
             var patient = await _unitOfWork.Patients.GetByIdAsync(patientID);
             titleLabel.Text = "Welcome " + patient.Name + " " + patient.Surname + "!";
-            
+
             var allBranches = await _unitOfWork.Branches.GetAllAsync();
             List<string> branchestxt = new List<string>();
 
-            foreach (var branch in allBranches) 
+            foreach (var branch in allBranches)
             {
                 branchestxt.Add(branch.Name);
             }
@@ -46,15 +48,15 @@ namespace HospitalAppointmentSystem.Forms
         {
             var selectedBranch = branchesListBox.SelectedItems[0];
             if (selectedBranch == null) { return; }
-            
+
             var branch = await _unitOfWork.Branches.FindAsync(x => x.Name.Equals(selectedBranch.ToString()));
             var doctors = await _unitOfWork.Doctors.FindAsync(x => x.BranchID == branch.First().ID);
-            
+
             List<string> doctortxt = new List<string>();
 
-            foreach (var doctor in doctors) 
+            foreach (var doctor in doctors)
             {
-                doctortxt.Add(doctor.Name + " " +  doctor.Surname);
+                doctortxt.Add(doctor.Name + "  " + doctor.Surname);
             }
 
             doctorsListBox.DataSource = doctortxt;
@@ -66,16 +68,21 @@ namespace HospitalAppointmentSystem.Forms
             var selectedDoctor = doctorsListBox.SelectedItems[0];
             if (selectedDoctor == null) { return; }
 
-            string[] array = selectedDoctor.ToString().Split(' ');
+            string[] array = selectedDoctor.ToString().Split("  ");
             string name = array[0];
             string surname = array[1];
 
             var doctor = await _unitOfWork.Doctors.FindAsync(x => (x.Name.Equals(name) && x.Surname.Equals(surname)));
+            if(doctor.Count == 0) 
+            {
+                MessageBox.Show("No doctors are found");
+                return;
+            }
             var WorkingHours = await _unitOfWork.WorkingHours.GetByIdAsync(doctor.First().WorkingHoursID);
 
             string enteredDate = dateTextBox.Text.Trim();
 
-            if(enteredDate.IsNullOrEmpty() || enteredDate.Contains(' ')) 
+            if (enteredDate.IsNullOrEmpty() || enteredDate.Contains(' '))
             {
                 MessageBox.Show("Please enter the date correctly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -89,21 +96,21 @@ namespace HospitalAppointmentSystem.Forms
             List<TimeOnly> apphours = new List<TimeOnly>();
             List<TimeOnly> hours = new List<TimeOnly>();
 
-            foreach (var app in appointmentsOnThatDate) 
+            foreach (var app in appointmentsOnThatDate)
             {
                 apphours.Add(app.time);
             }
 
             TimeOnly startTime = WorkingHours.StartTime;
 
-            for(int i = 0; i < 8; i++) 
+            for (int i = 0; i < 8; i++)
             {
                 TimeOnly hour = new TimeOnly(startTime.Hour + i, 0);
-                if(!apphours.Contains(hour)) 
-                hours.Add(hour);
+                if (!apphours.Contains(hour))
+                    hours.Add(hour);
             }
 
-            for(int i = 0; i < hours.Count; i++) 
+            for (int i = 0; i < hours.Count; i++)
             {
                 timeListBox.Items.Add(hours[i].ToShortTimeString());
             }
@@ -115,28 +122,30 @@ namespace HospitalAppointmentSystem.Forms
         private async void appointButton_Click(object sender, EventArgs e)
         {
             string dateEntered = dateTextBox.Text.Trim();
-            if(dateEntered.IsNullOrEmpty() || dateEntered.Contains(' ') || dateEntered.Length < 10) 
+            if (dateEntered.IsNullOrEmpty() || dateEntered.Contains(' ') || dateEntered.Length < 10)
             {
                 MessageBox.Show("Please enter the date correctly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (branchesListBox.SelectedIndex == -1 || doctorsListBox.SelectedIndex == -1 || timeListBox.SelectedIndex == -1) 
+            if (branchesListBox.SelectedIndex == -1 || doctorsListBox.SelectedIndex == -1 || timeListBox.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select the values from the tables.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            string[] doctorTextArray = doctorsListBox.SelectedItems[0].ToString().Split(' ');
-            string doctorName = doctorTextArray[0];
-            string doctorSurname = doctorTextArray[1];
+            string[] doctorTextArray = doctorsListBox.SelectedItems[0].ToString().Split("  ");
+            string doctorName = doctorTextArray[0].Trim();
+            string doctorSurname = doctorTextArray[1].Trim();
 
-            var doctor = await _unitOfWork.Doctors.FindAsync(x => (x.Name.Equals(doctorName) && x.Surname.Equals(doctorSurname)));
+            var doctor = await _unitOfWork.Doctors.FindAsync(x => x.Name == doctorName && x.Surname == doctorSurname);
             int doctorID = doctor.First().ID;
+            MessageBox.Show("DoctorID for appointment ist " + doctorID);
+            MessageBox.Show("PatientID for appointment ist " + patientID);
 
             string[] selectedHourArray = timeListBox.SelectedItems[0].ToString().Split(':');
             int selectedHour = Convert.ToInt32(selectedHourArray[0]);
-            TimeOnly appointmentHour = new TimeOnly(selectedHour,0);
+            TimeOnly appointmentHour = new TimeOnly(selectedHour, 0);
 
             string selectedBranch = branchesListBox.SelectedItems[0].ToString();
             var branch = await _unitOfWork.Branches.FindAsync(x => x.Name.Equals(selectedBranch));
@@ -144,10 +153,29 @@ namespace HospitalAppointmentSystem.Forms
             string[] dateArray = dateEntered.Split('.');
             DateOnly date = new DateOnly(Convert.ToInt32(dateArray[2]), Convert.ToInt32(dateArray[1]), Convert.ToInt32(dateArray[0]));
 
-            Appointments appointment = new Appointments { date = date , DoctorID = doctorID, PatientID = patientID, status = "Active", time = appointmentHour, DoctorNote = "", PatientNote = ""};
+            try
+            {
+                Appointments appointment = new Appointments
+                {
+                    date = date,
+                    DoctorID = doctorID,
+                    PatientID = patientID,
+                    status = "Active",
+                    time = appointmentHour,
+                    DoctorNote = "",
+                    PatientNote = ""
+                };
 
-            await _unitOfWork.Appointments.AddAsync(appointment);
-            await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.Appointments.AddAsync(appointment);
+                await _unitOfWork.SaveChangesAsync(); 
+
+                MessageBox.Show("Appointment created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                timeListBox.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

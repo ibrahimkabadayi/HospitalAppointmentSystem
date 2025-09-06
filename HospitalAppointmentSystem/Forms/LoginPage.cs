@@ -75,8 +75,6 @@ namespace HospitalAppointmentSystem
             string password = passwordTextBox.Text.Trim();
             string email = emailTextBox.Text.Trim();
 
-            MessageBox.Show("Pass check start here, password is " + password);
-
             bool allFieldsFilled = !string.IsNullOrEmpty(name) &&
                                   !string.IsNullOrEmpty(surname) &&
                                   !string.IsNullOrEmpty(userType) &&
@@ -90,8 +88,6 @@ namespace HospitalAppointmentSystem
                     x.Surname == surname &&
                     x.Email == email &&
                     (x.Password == null || x.Password == ""));
-
-                MessageBox.Show("Field check happened here");
 
                 if (doctorsWithoutPassword.Count > 0)
                 {
@@ -129,7 +125,6 @@ namespace HospitalAppointmentSystem
                 doctorIDWithNoPassword = 0;
             }
 
-            MessageBox.Show("Pass Check end here");
 
             if (name.Length == 0 || surname.Length == 0 || userType.Length == 0 || password.Length == 0 || email.Length == 0 || !email.Contains("@"))
             {
@@ -173,11 +168,8 @@ namespace HospitalAppointmentSystem
                 {
                     try
                     {
-                        MessageBox.Show("Creating Form2...");
                         var doctorForm = new Form2(ID);
-                        MessageBox.Show("Form2 created, showing...");
                         Methods.ShowFormAsPanel(doctorForm, this, ref currentForm);
-                        MessageBox.Show("Form2 shown");
                     }
                     catch (Exception ex)
                     {
